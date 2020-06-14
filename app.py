@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, send_file
+from flask import Flask, request, jsonify, render_template, send_file, Response
 from flask_cors import CORS
 from tempfile import NamedTemporaryFile
 from shutil import copyfileobj
@@ -112,7 +112,7 @@ def parrotify():
         newData = []
         for item in datas:
             if item[0] == 255 and item[1] == 255 and item[2] == 255:
-                newData.append((255, 255, 255, 0))
+                newData.append((255, 255, 255, 255))
             else:
                 newData.append(item)
 
@@ -133,3 +133,83 @@ def parrotify():
 # running REST interface, port=5000 for direct test, port=5001 for deployment from PM2
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
+
+@app.route("/test")
+def test():
+    response = Response( response = "penis", status=200, mimetype="text/plain;charset=UTF-8")
+    # response.headers.set('Content-Type', 'appication/octet-stream')
+    response.headers["testheader"] = "dick"
+    return response
+
+# Get the parrot gif frames from the server. Server decomposes gif into frames each time.
+@app.route('/getParrot')
+def getParrot():
+    def pos_to_pix(pos,size):
+        return (pos%size[0],int(np.floor(pos/size[1])))
+    
+    imageObject = Image.open('parrot.gif')
+    size= imageObject.size
+    background=[]
+    for frame in range(imageObject.n_frames):
+        imageObject.seek(frame)
+        
+        temp_image = imageObject.convert("RGBA")
+        datas = temp_image.getdata()
+
+        newData = []
+        for item in datas:
+            if item[0] == 255 and item[1] == 255 and item[2] == 255:
+                newData.append((255, 255, 255, 255))
+            else:
+                newData.append(item)
+
+        temp_image.putdata(newData)
+        current_image = np.array(temp_image.getdata()).flatten().tolist()
+        pixs = imageObject.getdata(0)
+        pos = 0
+
+        for index, pix in enumerate(pixs):
+            if pix == 195:
+                pos = index
+                break
+        nose_pos = pos_to_pix(pos, size)
+        #new_pos = [nose_pos[x] - new_size[x]//2 for x in range(2)]
+        #new_pos[1] += 10
+        parrot_position = {
+            "image": current_image,
+            "position": nose_pos
+        }
+        background.append(parrot_position)
+        # background[frame].paste(face, new_pos, face_mask)
+    return jsonify(background)
+
+
+        # dict = {
+        #     'avc' : 'nope'
+        # } 
+        # dict["key"] = 'value'
+
+@app.route('/getParrot2')
+def getParrot2():
+    imageObject = Image.open('parrot.gif')
+    background=[]
+    for frame in range(1):#range(imageObject.n_frames):
+        imageObject.seek(frame)
+
+        background.append(np.array(imageObject.convert("RGBA").getdata()).flatten())
+        pixs = imageObject.getdata(0)
+
+        for index, pix in enumerate(pixs):
+            if pix == 195:
+                pos = index
+                break
+        # nose_pos = pos_to_pix(pos, size)
+        # new_pos = [nose_pos[x] - new_size[x]//2 for x in range(2)]
+        # new_pos[1] += 10
+        # background[frame].paste(face, new_pos, face_mask)
+    
+    response = Response( response = background[0].tobytes(), status=200, mimetype="application/octet-stream")
+    # response.headers.set('Content-Type', 'appication/octet-stream')
+    response.headers["what"] = "thefuck"
+
+    return response

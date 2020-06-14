@@ -3,3 +3,4 @@
 *.png
 *.jfif
 *.pyc
+!parrot.gif
