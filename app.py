@@ -126,7 +126,7 @@ def parrotify():
     tempFileObj = NamedTemporaryFile(mode='w+b',suffix='gif')
     background[0].save(tempFileObj, format = 'GIF', save_all = True, append_images = [background[x] for x in range(imageObject.n_frames)])
     tempFileObj.seek(0,0)
-    background[0].save('test.gif', save_all = True, append_images = [background[x] for x in range(imageObject.n_frames)])
+    background[0].save('test.gif', format = 'GIF', save_all = True, append_images = [background[x] for x in range(imageObject.n_frames)])
     print("saved as: " + 'out/'+nameExt.split('.')[0]+'.gif')
     return send_file(tempFileObj, mimetype='image/gif')
 
