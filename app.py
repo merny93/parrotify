@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, send_file, Response
+from flask import Flask, request, jsonify, render_template, send_file, Response, make_response, url_for, send_from_directory
 from flask_cors import CORS
 from tempfile import NamedTemporaryFile
 from shutil import copyfileobj
@@ -16,6 +16,10 @@ import sys
 from facenet_pytorch import MTCNN
 import cv2 as cv
 
+# Add support for interpreting common web types without relying on system registry
+import mimetypes
+mimetypes.add_type("text/css", ".css")
+mimetypes.add_type("text/javascript", ".js")
 
 app = Flask(__name__)
 CORS(app)
@@ -134,12 +138,31 @@ def parrotify():
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
 
-@app.route("/test")
-def test():
-    response = Response( response = "penis", status=200, mimetype="text/plain;charset=UTF-8")
-    # response.headers.set('Content-Type', 'appication/octet-stream')
-    response.headers["testheader"] = "dick"
+@app.route("/getParrotNoseCoords")
+def getNoseCoords():
+    return jsonify([1,2,3,4])
+
+@app.route("/getParrotGIF")
+def getParrotGIF():
+    response = make_response(send_file("static/parrot.gif", mimetype='image/gif'))
     return response
+
+
+@app.route("/test1")
+def test1():
+    response = make_response(send_file("static/test.jpg", mimetype='image/jpg'))
+    return response
+
+@app.route("/getParrotNoseFrames")
+def getParrotNoseFrames():
+    return 
+
+# @app.route('/getParrotGIF')
+# def getParrotGIF():
+#     response = Response(response= , status=200, mimetype='application/octet-stream' )
+
+# @app.route('/getParrotFrames')
+# def getParrotFrames
 
 # Get the parrot gif frames from the server. Server decomposes gif into frames each time.
 @app.route('/getParrot')
