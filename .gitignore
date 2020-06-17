@@ -1,0 +1,6 @@
+*.gif
+*.jpg
+*.png
+*.jfif
+*.pyc
+!parrot.gif
