@@ -9,6 +9,8 @@ from PIL import Image
 
 from PIL import GifImagePlugin
 
+from io import BytesIO
+
 import numpy as np
  
 import sys
@@ -46,24 +48,38 @@ def splash():
 
 @app.route('/parrotify', methods=['POST'])
 def parrotify():
+    print("hello")
     if not request.files:
         return False    
-    image = request.files["image"]
+    print("here")
+    image = request.files['image']
     nameExt = image.filename
     face = Image.open(image)
+    face_size = face.size
+    print("FACESIZE", face.size)
+    pix_count = face_size[0] * face_size[1]
+    scale = np.sqrt(10e3 / pix_count)
+    print("SCALE", scale)
+    low_res_face = face.resize((int(face_size[0]*scale),int(face_size[1]*scale)), Image.ANTIALIAS)
+    #face_stretch = [face_size[0]*scale, face_size[1]*scale]
     #im = cv.imread(image)
-    boxes, _ = mtcnn.detect(face)
+    boxes, _ = mtcnn.detect(low_res_face)
 
     try:
         box = boxes[0].tolist()
     except:
         print("no face found")
         exit(0)
+    low_res_face.save('testing.png')
+    print([box[x]/scale for x in range(4)])
+    face = face.crop(tuple([int(box[x]/scale) for x in range(4)]))
+    size= imageObject.size
+    new_size = [int(0.6 * x) for x in size]
 
-    face = face.crop(tuple([box[x] for x in range(4)]))
-    face_mask = np.ones(face.size, dtype=np.uint8) *250
+    face = face.resize(tuple(new_size), Image.ANTIALIAS)
 
-
+    face_mask = np.ones(face.size, dtype=np.uint8)*255
+    
     def elipse(x,y,s):
         return ((x-(s[0]/2))**2)/((s[0]/2)**2) + ((y-(s[1]/2))**2)/((s[1]/2)**2) 
 
@@ -71,22 +87,12 @@ def parrotify():
         for y, val in enumerate(col):
 
             if elipse(x,y,np.shape(face_mask)) < 1:
-                face_mask[x,y] = 250
+                face_mask[x,y] = 255
             else:
                 face_mask[x,y] = 0
 
     face_mask = Image.fromarray(face_mask, "L")
-
-
-    size= imageObject.size
-    new_size = [int(0.6 * x) for x in size]
-
-    face = face.resize(tuple(new_size), Image.ANTIALIAS)
-    face_mask = face_mask.resize(tuple(new_size), Image.ANTIALIAS)
-
-
     face = face.convert("RGBA")
-
 
     def pos_to_pix(pos,size):
         return (pos%size[0],int(np.floor(pos/size[1])))
@@ -116,7 +122,7 @@ def parrotify():
         newData = []
         for item in datas:
             if item[0] == 255 and item[1] == 255 and item[2] == 255:
-                newData.append((255, 255, 255, 255))
+                newData.append((255, 255, 255, 0))
             else:
                 newData.append(item)
 
@@ -127,112 +133,25 @@ def parrotify():
     # background[0].save(img_io,format="GIF") #save_all = True, append_images = [background[x] for x in range(imageObject.n_frames)])
     # img_io.seek(0)
 
-    tempFileObj = NamedTemporaryFile(mode='w+b',suffix='gif')
-    background[0].save(tempFileObj, format = 'GIF', save_all = True, append_images = [background[x] for x in range(imageObject.n_frames)])
-    tempFileObj.seek(0,0)
+    #############################
+    ### DO BYTESIO STUFF HERE ###
+    #############################
+
+    # tempFileObj = NamedTemporaryFile(mode='w+b',suffix='gif')
+    bytesObject = BytesIO()
+    background[0].save(
+            bytesObject,
+            # set duration maybe?
+            format = 'GIF',
+            save_all = True,
+            append_images = background[1:] ) # [backgro   und[x] for x in range(imageObject.n_frames)])
+    bytesObject.seek(0,0)
     background[0].save('test.gif', format = 'GIF', save_all = True, append_images = [background[x] for x in range(imageObject.n_frames)])
     print("saved as: " + 'out/'+nameExt.split('.')[0]+'.gif')
-    return send_file(tempFileObj, mimetype='image/gif')
+    return send_file(bytesObject, attachment_filename= "namey.gif", mimetype='image/gif', as_attachment=True)
 
 # running REST interface, port=5000 for direct test, port=5001 for deployment from PM2
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
 
-@app.route("/getParrotNoseCoords")
-def getNoseCoords():
-    return jsonify([1,2,3,4])
 
-@app.route("/getParrotGIF")
-def getParrotGIF():
-    response = make_response(send_file("static/parrot.gif", mimetype='image/gif'))
-    return response
-
-
-@app.route("/test1")
-def test1():
-    response = make_response(send_file("static/test.jpg", mimetype='image/jpg'))
-    return response
-
-@app.route("/getParrotNoseFrames")
-def getParrotNoseFrames():
-    return 
-
-# @app.route('/getParrotGIF')
-# def getParrotGIF():
-#     response = Response(response= , status=200, mimetype='application/octet-stream' )
-
-# @app.route('/getParrotFrames')
-# def getParrotFrames
-
-# Get the parrot gif frames from the server. Server decomposes gif into frames each time.
-@app.route('/getParrot')
-def getParrot():
-    def pos_to_pix(pos,size):
-        return (pos%size[0],int(np.floor(pos/size[1])))
-    
-    imageObject = Image.open('parrot.gif')
-    size= imageObject.size
-    background=[]
-    for frame in range(imageObject.n_frames):
-        imageObject.seek(frame)
-        
-        temp_image = imageObject.convert("RGBA")
-        datas = temp_image.getdata()
-
-        newData = []
-        for item in datas:
-            if item[0] == 255 and item[1] == 255 and item[2] == 255:
-                newData.append((255, 255, 255, 255))
-            else:
-                newData.append(item)
-
-        temp_image.putdata(newData)
-        current_image = np.array(temp_image.getdata()).flatten().tolist()
-        pixs = imageObject.getdata(0)
-        pos = 0
-
-        for index, pix in enumerate(pixs):
-            if pix == 195:
-                pos = index
-                break
-        nose_pos = pos_to_pix(pos, size)
-        #new_pos = [nose_pos[x] - new_size[x]//2 for x in range(2)]
-        #new_pos[1] += 10
-        parrot_position = {
-            "image": current_image,
-            "position": nose_pos
-        }
-        background.append(parrot_position)
-        # background[frame].paste(face, new_pos, face_mask)
-    return jsonify(background)
-
-
-        # dict = {
-        #     'avc' : 'nope'
-        # } 
-        # dict["key"] = 'value'
-
-@app.route('/getParrot2')
-def getParrot2():
-    imageObject = Image.open('parrot.gif')
-    background=[]
-    for frame in range(1):#range(imageObject.n_frames):
-        imageObject.seek(frame)
-
-        background.append(np.array(imageObject.convert("RGBA").getdata()).flatten())
-        pixs = imageObject.getdata(0)
-
-        for index, pix in enumerate(pixs):
-            if pix == 195:
-                pos = index
-                break
-        # nose_pos = pos_to_pix(pos, size)
-        # new_pos = [nose_pos[x] - new_size[x]//2 for x in range(2)]
-        # new_pos[1] += 10
-        # background[frame].paste(face, new_pos, face_mask)
-    
-    response = Response( response = background[0].tobytes(), status=200, mimetype="application/octet-stream")
-    # response.headers.set('Content-Type', 'appication/octet-stream')
-    response.headers["what"] = "thefuck"
-
-    return response

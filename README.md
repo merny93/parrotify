@@ -10,21 +10,20 @@ https://stackoverflow.com/questions/8637153/how-to-return-images-in-flask-respon
 
 https://github.com/lukechilds/merge-images
 
-## Set up python requirements:
-pip install -r requirements.txt
+## Set up python requirements:  
+pip install -r requirements.txt  
 
 ## HOW TO START API (ON WINDOWS POWERSHELL):
-$env:FLASK_APP = "app.py"
-$env:FLASK_ENV = "development"
-flask run
+$env:FLASK_APP = "app.py"  
+$env:FLASK_ENV = "development"  
+flask run  
 
-## HOW TO START API (ON WINDOWS CMD):
-set FLASK_APP=app.py
-set FLASK_ENV=development
-flask run
+## HOW TO START API (ON WINDOWS CMD):  
+set FLASK_APP=app.py  
+set FLASK_ENV=development  
+flask run  
 
-
-## ON OTHER SYSTEMS
-export FLASK_APP=app.py
-export FLASK_ENV=development
-flask run
+## ON OTHER SYSTEMS  
+export FLASK_APP=app.py  
+export FLASK_ENV=development  
+flask run  
