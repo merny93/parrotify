@@ -56,15 +56,23 @@ document.getElementById('file-input').addEventListener("change", function () {
     if (input.files && input.files[0]) {
         if (input.files[0].size > 5_000_000) {
             input.value = '';
+            document.getElementById("preview-image").setAttribute("src", '#');
             alert("Image is too large! Try an image under 5mb.")
             return;
         }
 
+        let extension = input.files[0].name.split('.').pop();
+        if (extension != 'jpg' && extension != 'pnj'){
+            input.value = '';
+            document.getElementById("preview-image").setAttribute("src", '#');
+            alert("File format not supported")
+            return;
+        }
         let reader = new FileReader();
 
         reader.onload = function (e) {
             document.getElementById("preview-image").setAttribute("src", e.target.result);
-            input.labels[0].innerHTML = `${input.files[0].name} (${input.files[0].size} bytes)`;
+            input.labels[0].innerHTML =  '';//`${input.files[0].name} (${input.files[0].size} bytes)`;
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -118,17 +126,17 @@ function getImage(url) {
 // httpGetAsync("/getParrotGIF", (response) => pr = response);
 
 
-canvas = document.getElementById('canvas');
-function showimage(canvas, blob) {
-    let ctx = canvas.getContext('2d');
-    let img = new Image();
+// canvas = document.getElementById('canvas');
+// function showimage(canvas, blob) {
+//     let ctx = canvas.getContext('2d');
+//     let img = new Image();
 
-    img.onload = function () {
-        ctx.drawImage(img, 0, 0)
-    }
+//     img.onload = function () {
+//         ctx.drawImage(img, 0, 0)
+//     }
 
-    img.src = URL.createObjectURL(blob);
-}
+//     img.src = URL.createObjectURL(blob);
+// }
 
 
 // var x;
@@ -178,6 +186,8 @@ window.addEventListener("load", function () {
             img.src = URL.createObjectURL(this.response);
             let aTag = document.getElementById("finished-gif-link");
             aTag.setAttribute("href", img.src);
+            document.getElementById('image-form').style.display = "none"
+            document.getElementById('gif-holder').style.display = "block"
         });
 
         // Define what happens in case of error
