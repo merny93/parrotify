@@ -18,3 +18,55 @@ body{
     max-width: 200px;
     max-height: 200px;
 }
+
+#dropzone{
+    background-color:#f4f4f4;
+    border: 2px dashed black;
+    height: 200px;
+    width: 200px;
+}
+#dropzone.hover {
+    background-color:red;
+}
+
+#dropmask{
+    height: 200px;
+    width: 200px;
+    display: block;
+    z-index: 50;
+    position: absolute;
+}
+#dropmask.hidden{
+    display: none;
+}
+
+#dropcontent{
+    text-align: center;
+    margin:55px 80px;;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+
+label {
+    cursor: pointer;
+    z-index: 99;
+    /* Style as you please, it will become the visible UI component. */
+ }
+ 
+ #file-input {
+    opacity: 0;
+    position: absolute;
+    z-index: 99;
+    display: none;
+
+ }
+
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+  display: none;
+}

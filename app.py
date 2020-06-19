@@ -5,7 +5,7 @@ from shutil import copyfileobj
 from os import remove
 # Reading an animated GIF file using Python Image Processing Library - Pillow
 from io import StringIO
-from PIL import Image
+from PIL import Image, ImagePalette
 
 from PIL import GifImagePlugin
 
@@ -115,28 +115,35 @@ def parrotify():
         new_pos[1] += 10
         background[frame].paste(face, new_pos, face_mask)
 
-
-        
+        ##turn to RGBA to make transparancy posssilbe
+        background[frame] = background[frame].convert("RGBA")
         datas = background[frame].getdata()
 
+        ##set the white to transparent black
         newData = []
         for item in datas:
             if item[0] == 255 and item[1] == 255 and item[2] == 255:
-                newData.append((255, 255, 255, 0))
+                newData.append((0, 0, 0, 0))
             else:
                 newData.append(item)
-
         background[frame].putdata(newData)
 
-    # img_io = StringIO()
-    # print(type(img_io))     
-    # background[0].save(img_io,format="GIF") #save_all = True, append_images = [background[x] for x in range(imageObject.n_frames)])
-    # img_io.seek(0)
+        ##get transparancy layer
+        alpha = background[frame].getchannel('A')
+
+        ##turn the rest RGB only using 254 colors leaving one color for transparancy
+        background[frame] = background[frame].convert('RGB').convert('P', palette=Image.ADAPTIVE, colors=255)
+
+        #paste in the transparancy layer
+        mask = Image.eval(alpha, lambda a: 255 if a <=128 else 0)
+        background[frame].paste(255, mask)
+        ##tell it what the transparancy layer is
+        background[frame].info['transparency'] = 255
+
 
     #############################
     ### DO BYTESIO STUFF HERE ###
     #############################
-
     # tempFileObj = NamedTemporaryFile(mode='w+b',suffix='gif')
     bytesObject = BytesIO()
     background[0].save(
@@ -144,10 +151,14 @@ def parrotify():
             # set duration maybe?
             format = 'GIF',
             save_all = True,
+            disposal=2,
             append_images = background[1:] ) # [backgro   und[x] for x in range(imageObject.n_frames)])
     bytesObject.seek(0,0)
-    background[0].save('test.gif', format = 'GIF', save_all = True, append_images = [background[x] for x in range(imageObject.n_frames)])
-    print("saved as: " + 'out/'+nameExt.split('.')[0]+'.gif')
+
+
+    # background[0].save('test.gif', format = 'GIF', save_all = True, append_images = [background[x] for x in range(imageObject.n_frames)])
+    # print("saved as: " + 'out/'+nameExt.split('.')[0]+'.gif')
+
     return send_file(bytesObject, attachment_filename= "namey.gif", mimetype='image/gif', as_attachment=True)
 
 # running REST interface, port=5000 for direct test, port=5001 for deployment from PM2

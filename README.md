@@ -19,11 +19,11 @@ $env:FLASK_ENV = "development"
 flask run  
 
 ## HOW TO START API (ON WINDOWS CMD):  
-set FLASK_APP=app.py  
+set FLASK_APP=app.py   <- not needed if app is called app.py
 set FLASK_ENV=development  
 flask run  
 
 ## ON OTHER SYSTEMS  
 export FLASK_APP=app.py  
 export FLASK_ENV=development  
-flask run  
+flask run 

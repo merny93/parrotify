@@ -1,6 +1,55 @@
 //penis
 console.log("penis2")
+window.addEventListener("drop", (event) =>{
+    event.preventDefault();
+})
 
+window.addEventListener("dragover", (event) =>{
+    event.preventDefault();
+})
+
+
+//***************************************** */
+//code to handle the hover stuff
+
+//not gonna lie i have no clue why we need this but we simply do 
+//jkjk it initiates the mask as hidden since we have no need for it  
+document.getElementById("dropmask").classList.add('hidden');
+
+var drag_over = function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    document.getElementById("dropzone").classList.add('hover');
+    document.getElementById("dropmask").classList.remove('hidden')
+};
+
+var drag_leave = function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    document.getElementById("dropzone").classList.remove('hover');
+    document.getElementById("dropmask").classList.add('hidden');
+
+};
+
+
+var drag_drop = function(e){
+    e.stopPropagation();
+    e.preventDefault();	
+    document.getElementById("dropzone").classList.remove('hover');
+    document.getElementById("dropmask").classList.add('hidden');
+    document.querySelector('input').files = e.dataTransfer.files;
+    document.getElementById('file-input').dispatchEvent(new Event('change'));
+};
+
+var overArea = document.getElementById('dropzone');
+var dropMask = document.getElementById('dropmask');
+
+overArea.addEventListener('dragover', drag_over, false);
+dropMask.addEventListener('dragleave',drag_leave, false);
+dropMask.addEventListener('drop', drag_drop, false);
+
+
+/// code to get the input and send over
 var x;
 document.getElementById('file-input').addEventListener("change", function () {
     input = this;

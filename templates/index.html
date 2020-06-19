@@ -4,6 +4,10 @@
 
 <head>
     <title>Parrotify</title>
+    <!-- Jquerry i give up
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    Not today suckkers
+    -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -23,35 +27,41 @@
 
                 <h1>Parrotification</h1>
                 <h3> Noun. The art of making something beautiful even more beautiful.
-                <hr>
-                <h2>Upload a faces</h2>
-
-                <form id="image-form">
-                    <div class="form-group">
-                        <label>Select image</label>
-                        <div class="custom-file">
-                            <input id="file-input" type="file" class="custom-file-input" name="image">
-                            <label class="custom-file-label" for="file-input">Select image...</label>
+                    <hr>
+                    <h2>Upload a faces</h2>
+                    <form id="image-form">
+                        <div class="form-group">
+                            <label>Select image</label>
+                            <div class="custom-file">
+                                <div id="dropzone">
+                                    <div id="dropmask"></div>
+                                    <div id="dropcontent">
+                                        <label for="file-input">Browse...</label>
+                                        <input type="file" name="image" id="file-input" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+                        <div>
+                            <img src="#" id="preview-image" alt="">
+                        </div>
+
+                        <button id="submit-button" type="submit" class="btn btn-primary">Upload</button>
+
+                        <canvas id="canvas" style="border: 1px solid black"></canvas>
+
+
+                    </form>
+
+                    <div id="dropit">
+                        <a id="finished-gif-link" href="#" download="hehehe.gif">
+                            <img src="#" id="finished-gif" alt="nonono"
+                                style="border: 1px solid black;width:100px;height:100px;">
+                        </a>
                     </div>
 
-                    <div>
-                        <img src="#" id="preview-image" alt="">
-                    </div>
 
-                    <button id="submit-button" type="submit" class="btn btn-primary">Upload</button>
-
-                    <canvas id="canvas" style="border: 1px solid black"></canvas>
-
-
-                </form>
-
-                <div id="dropit">
-                    <a id="finished-gif-link" href="#" download="hehehe.gif">
-                        <img src="#" id="finished-gif" alt="nonono"
-                            style="border: 1px solid black;width:100px;height:100px;">
-                    </a>
-                </div>
 
             </div>
 
