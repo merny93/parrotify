@@ -63,7 +63,6 @@ function reset_click(){
 
 
 /// code to get the input and send over
-var reader;
 document.getElementById('file-input').addEventListener("change", function () {
     input = this;
     if (input.files && input.files[0]) {
@@ -83,7 +82,7 @@ document.getElementById('file-input').addEventListener("change", function () {
             return;
         }
         // let reader = new FileReader();
-        reader = new FileReader();
+        var reader = new FileReader();
         reader.onload = function (e) {
             document.getElementById("preview-image").setAttribute("src", e.target.result);
             input.labels[0].classList.add("hidden");//`${input.files[0].name} (${input.files[0].size} bytes)`;
@@ -136,48 +135,8 @@ function getImage(url) {
 }
 
 
-// httpGetAsync("/getParrot", processImageCallback);
-// httpGetAsync("/getParrotGIF", (response) => pr = response);
-
-
-// canvas = document.getElementById('canvas');
-// function showimage(canvas, blob) {
-//     let ctx = canvas.getContext('2d');
-//     let img = new Image();
-
-//     img.onload = function () {
-//         ctx.drawImage(img, 0, 0)
-//     }
-
-//     img.src = URL.createObjectURL(blob);
-// }
-
-
-// var x;
-// getImage("/getParrotGIF").then((value) => {
-//     x = value;
-//     // showimage(canvas, value);
-//     console.log("did it")
-// });
-
-function makeGIF(img) {
-    console.log("makin a gif")
-    let gif = new GIF({
-        workers: 2,
-        quality: 10
-    });
-
-    gif.addFrame(img);
-    gif.on('finished', function (blob) {
-        window.open(URL.createObjectURL(blob));
-    })
-
-    gif.render();
-}
-
-let xy; 
-/** Submit form using http request */
 window.addEventListener("load", function () {
+
     function sendData() {
         const XHR = new XMLHttpRequest();
         // Bind the FormData object and the form element
@@ -223,3 +182,12 @@ window.addEventListener("load", function () {
         sendData();
     });
 });
+
+
+function resetform(){
+    document.getElementById("image-form").style.display = "block";
+    document.getElementById("gif-holder").style.display = "none";
+    document.getElementById("image-form").value = '';
+    document.getElementById("preview-image").setAttribute("src", '#');
+    document.getElementById("browse-label").innerHTML = "Drop or browse face";
+}

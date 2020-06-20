@@ -82,7 +82,6 @@ def parrotify():
         box = boxes[0].tolist()
     except:
         return "sadness noises"
-    low_res_face.save('testing.png')
     face = face.crop(tuple([int(box[x]/scale) for x in range(4)]))
     size= imageObject.size
     new_size = [int(0.6 * x) for x in size]
