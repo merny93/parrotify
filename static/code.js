@@ -63,7 +63,7 @@ function reset_click(){
 
 
 /// code to get the input and send over
-var x;
+var reader;
 document.getElementById('file-input').addEventListener("change", function () {
     input = this;
     if (input.files && input.files[0]) {
@@ -82,13 +82,13 @@ document.getElementById('file-input').addEventListener("change", function () {
             alert("File format not supported")
             return;
         }
-        let reader = new FileReader();
-
+        // let reader = new FileReader();
+        reader = new FileReader();
         reader.onload = function (e) {
             document.getElementById("preview-image").setAttribute("src", e.target.result);
             input.labels[0].classList.add("hidden");//`${input.files[0].name} (${input.files[0].size} bytes)`;
         }
-
+        
         reader.readAsDataURL(input.files[0]);
     }
 })
@@ -213,6 +213,11 @@ window.addEventListener("load", function () {
     // ...and take over its submit event.
     form.addEventListener("submit", function (event) {
         event.preventDefault();
+        if ( document.getElementById("file-input").files.length < 1) {
+            console.log("No file selected. Not submitting.")
+            return;
+        }
+
         console.log("SUBMISSION")
 
         sendData();
