@@ -30,6 +30,7 @@
                 </div>
                 <hr> <br>
 
+
                 <form id="image-form">
                     <div class="form-group">
                         <div class="custom-file">
@@ -51,17 +52,13 @@
                 <div id="gif-holder">
                     <a id="finished-gif-link" href="#" download="parrot_face.gif">
                         <img src="#" id="finished-gif" alt="oh oh something aint right" style="border: 1px solid black;">
-                        <button id="download-button">Download</button>
+                        <button type="button" class="btn btn-primary response-btn" id="download-button">Download</button>
                     </a>
+                    <button type="button" class="btn btn-primary response-btn" id="share-button" onclick="share_click()">Share</button>
+                    <button type="button" class="btn btn-primary response-btn" id="reset-button" onclick="reset_click()">Parrotify another</button>
+
                 </div>
-
-
-
-
-
             </div>
-
-
         </div>
     </div>
 

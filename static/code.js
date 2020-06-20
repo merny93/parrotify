@@ -8,7 +8,6 @@ window.addEventListener("dragover", (event) =>{
     event.preventDefault();
 })
 
-
 //***************************************** */
 //code to handle the hover stuff
 
@@ -31,7 +30,6 @@ var drag_leave = function(e) {
 
 };
 
-
 var drag_drop = function(e){
     e.stopPropagation();
     e.preventDefault();	
@@ -48,12 +46,28 @@ overArea.addEventListener('dragover', drag_over, false);
 dropMask.addEventListener('dragleave',drag_leave, false);
 dropMask.addEventListener('drop', drag_drop, false);
 
+function share_click(){
+    console.log(this);
+}
+
+function reset_click(){
+    console.log(this);
+    document.getElementById('image-form').style.display = "block";
+    document.getElementById('gif-holder').style.display = "none";
+    document.getElementById('image-form').reset();
+    document.getElementById("preview-image").setAttribute("src", '#');
+    document.getElementById("dropmask").classList.remove('hidden');
+    document.getElementById("file-input").labels[0].classList.remove("hidden");
+
+}
+
 
 /// code to get the input and send over
 var x;
 document.getElementById('file-input').addEventListener("change", function () {
     input = this;
     if (input.files && input.files[0]) {
+        /* Check if image is too large */
         if (input.files[0].size > 5_000_000) {
             input.value = '';
             document.getElementById("preview-image").setAttribute("src", '#');
@@ -62,7 +76,7 @@ document.getElementById('file-input').addEventListener("change", function () {
         }
 
         let extension = input.files[0].name.split('.').pop();
-        if (extension != 'jpg' && extension != 'pnj'){
+        if (extension != 'jpg' && extension != 'jpeg' && extension != 'png'){
             input.value = '';
             document.getElementById("preview-image").setAttribute("src", '#');
             alert("File format not supported")
@@ -72,7 +86,7 @@ document.getElementById('file-input').addEventListener("change", function () {
 
         reader.onload = function (e) {
             document.getElementById("preview-image").setAttribute("src", e.target.result);
-            input.labels[0].innerHTML =  '';//`${input.files[0].name} (${input.files[0].size} bytes)`;
+            input.labels[0].classList.add("hidden");//`${input.files[0].name} (${input.files[0].size} bytes)`;
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -161,24 +175,14 @@ function makeGIF(img) {
     gif.render();
 }
 
-function doGiffing(gif){
-    
-}
-
-//// THE FORM CODE IS BELLOW
-
-
-
-var xy;
-
+let xy; 
+/** Submit form using http request */
 window.addEventListener("load", function () {
-
-
     function sendData() {
         const XHR = new XMLHttpRequest();
         // Bind the FormData object and the form element
         const FD = new FormData(form);
-
+        xy = FD;
         // Define what happens on successful data submission
         XHR.addEventListener("load", function (event) {
 
