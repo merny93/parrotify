@@ -1,6 +1,7 @@
 html {
     position: relative;
     min-height: 100%;
+
 }
 body{
     margin-bottom: 60px;
@@ -15,8 +16,8 @@ body{
 }
 
 #preview-image{
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 200px;
+    max-height: 200px;
     overflow: auto;
     margin: auto;
     position: absolute;
@@ -28,8 +29,11 @@ body{
 #dropzone{
     background-color:#f4f4f4;
     border: 2px dashed black;
-    height: 200px;
-    width: 200px;
+    height: 400px;
+    width: 400px;
+    left: 50%;
+    margin-left: -200px;
+    position: absolute;
 }
 #dropzone.hover {
     background-color:lightgray;
@@ -37,8 +41,8 @@ body{
 }
 
 #dropmask{
-    height: 200px;
-    width: 200px;
+    height: 400px;
+    width: 400px;
     display: block;
     z-index: 50;
     position: absolute;
@@ -73,11 +77,13 @@ label {
     position: absolute;
     display: none;
 
+
  }
 
 .form-group{
     position: relative;
-    padding-bottom: 300px;
+    padding-bottom: 150px;
+    margin: auto;
 }
 
 #browse-label{
@@ -85,8 +91,30 @@ label {
     height: 100%;
     width: 100%;
     text-align: center;
+    padding-top: 150px;
+    font-size: 20pt;
+}
+
+
+
+#finished-gif{
+    height: 400px;
+    width: 400px;
+    position: absolute;
+    left: 50%;
+    margin-left: -200px;
 }
 
 #gif-holder{
-   display: none; 
+    display: none;
+    text-align: center;
+}
+
+
+#download-button{
+    margin-top: 425px;
+}
+
+#submit-button{
+    margin-top: 250px;
 }

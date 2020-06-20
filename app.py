@@ -48,18 +48,22 @@ def splash():
 
 @app.route('/parrotify', methods=['POST'])
 def parrotify():
-    print("hello")
     if not request.files:
-        return False    
-    print("here")
+        return "sad noises"    
+
     image = request.files['image']
-    nameExt = image.filename
-    face = Image.open(image)
+    file_type = image.mimetype.split("/")[-1]
+    good_files = ['jpg', 'png', 'jpeg']
+    if file_type not in good_files:
+        return "sad noises"
+    #nameExt = image.filename
+    try:
+        face = Image.open(image)
+    except:
+        return "sadness noises"
     face_size = face.size
-    print("FACESIZE", face.size)
     pix_count = face_size[0] * face_size[1]
     scale = np.sqrt(10e3 / pix_count)
-    print("SCALE", scale)
     low_res_face = face.resize((int(face_size[0]*scale),int(face_size[1]*scale)), Image.ANTIALIAS)
     #face_stretch = [face_size[0]*scale, face_size[1]*scale]
     #im = cv.imread(image)
@@ -68,10 +72,8 @@ def parrotify():
     try:
         box = boxes[0].tolist()
     except:
-        print("no face found")
-        exit(0)
+        return "sadness noises"
     low_res_face.save('testing.png')
-    print([box[x]/scale for x in range(4)])
     face = face.crop(tuple([int(box[x]/scale) for x in range(4)]))
     size= imageObject.size
     new_size = [int(0.6 * x) for x in size]
