@@ -111,17 +111,13 @@ label {
     height: 100%;
 }
 
-/* .response-btn{
-    margin-top: 425px;
-    margin-left: 6px;
-    margin-right: 6px;
+#close-image-btn{
+    z-index: 99; position:relative; margin-right: 10px; margin-top:8px;
+    width:30px;
+    height:30px;
+    font-size: 2em;
+
 }
-
-
-
-#submit-button{
-    margin-top: 250px;
-} */
 
 #content-holder{
     height: 475px;

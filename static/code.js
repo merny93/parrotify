@@ -34,13 +34,14 @@ var drag_drop = function(e){
     e.stopPropagation();
     e.preventDefault();	
     document.getElementById("dropzone").classList.remove('hover');
-    document.getElementById("dropmask").classList.add('hidden');
+    // document.getElementById("dropmask").classList.add('hidden');
     document.querySelector('input').files = e.dataTransfer.files;
     document.getElementById('file-input').dispatchEvent(new Event('change'));
 };
 
 var overArea = document.getElementById('dropzone');
 var dropMask = document.getElementById('dropmask');
+var closeImageBtn = document.getElementById("close-image-btn")
 
 overArea.addEventListener('dragover', drag_over, false);
 dropMask.addEventListener('dragleave',drag_leave, false);
@@ -54,11 +55,11 @@ function reset_click(){
     console.log(this);
     document.getElementById('image-form').style.display = "block";
     document.getElementById('gif-holder').style.display = "none";
-    document.getElementById('image-form').reset();
     document.getElementById("preview-image").setAttribute("src", '#');
-    document.getElementById("dropmask").classList.remove('hidden');
+    document.getElementById("dropmask").classList.add('hidden');
     document.getElementById("file-input").labels[0].classList.remove("hidden");
-
+    document.getElementById('image-form').reset();
+    closeImageBtn.classList.add('hidden')
 }
 
 
@@ -86,6 +87,7 @@ document.getElementById('file-input').addEventListener("change", function () {
         reader.onload = function (e) {
             document.getElementById("preview-image").setAttribute("src", e.target.result);
             input.labels[0].classList.add("hidden");//`${input.files[0].name} (${input.files[0].size} bytes)`;
+            closeImageBtn.classList.remove("hidden");
         }
         
         reader.readAsDataURL(input.files[0]);
@@ -184,10 +186,10 @@ window.addEventListener("load", function () {
 });
 
 
-function resetform(){
-    document.getElementById("image-form").style.display = "block";
-    document.getElementById("gif-holder").style.display = "none";
-    document.getElementById("image-form").value = '';
-    document.getElementById("preview-image").setAttribute("src", '#');
-    document.getElementById("browse-label").innerHTML = "Drop or browse face";
-}
+// function resetform(){
+//     document.getElementById("image-form").style.display = "block";
+//     document.getElementById("gif-holder").style.display = "none";
+//     document.getElementById("image-form").value = '';
+//     document.getElementById("preview-image").setAttribute("src", '#');
+//     document.getElementById("browse-label").innerHTML = "Drop or browse face";
+// }
