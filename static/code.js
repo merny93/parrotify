@@ -76,10 +76,10 @@ document.getElementById('file-input').addEventListener("change", function () {
         }
 
         let extension = input.files[0].name.split('.').pop();
-        if (extension != 'jpg' && extension != 'jpeg' && extension != 'png'){
+        if (extension != 'jpg' && extension != 'jpeg' && extension != 'png' && extension != 'gif'){
             input.value = '';
             document.getElementById("preview-image").setAttribute("src", '#');
-            alert("File format not supported")
+            alert("File format not supported. Please use gif, jpg, or png.")
             return;
         }
         // let reader = new FileReader();

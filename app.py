@@ -18,6 +18,8 @@ import sys
 from facenet_pytorch import MTCNN
 import cv2 as cv
 
+from markupsafe import escape
+
 # Add support for interpreting common web types without relying on system registry
 import mimetypes
 mimetypes.add_type("text/css", ".css")
@@ -45,6 +47,13 @@ imageObject = Image.open("parrot.gif")
 def splash():
     return render_template('index.html')
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.route('/share/<image_id>')
+def get_shared_image(image_id):
+    return escape(image_id)
 
 @app.route('/parrotify', methods=['POST'])
 def parrotify():
