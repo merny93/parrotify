@@ -50,7 +50,6 @@ dropMask.addEventListener('drop', drag_drop, false);
 
 
 /// code to get the input and send over
-var x;
 document.getElementById('file-input').addEventListener("change", function () {
     input = this;
     if (input.files && input.files[0]) {
@@ -122,57 +121,7 @@ function getImage(url) {
 }
 
 
-// httpGetAsync("/getParrot", processImageCallback);
-// httpGetAsync("/getParrotGIF", (response) => pr = response);
-
-
-// canvas = document.getElementById('canvas');
-// function showimage(canvas, blob) {
-//     let ctx = canvas.getContext('2d');
-//     let img = new Image();
-
-//     img.onload = function () {
-//         ctx.drawImage(img, 0, 0)
-//     }
-
-//     img.src = URL.createObjectURL(blob);
-// }
-
-
-// var x;
-// getImage("/getParrotGIF").then((value) => {
-//     x = value;
-//     // showimage(canvas, value);
-//     console.log("did it")
-// });
-
-function makeGIF(img) {
-    console.log("makin a gif")
-    let gif = new GIF({
-        workers: 2,
-        quality: 10
-    });
-
-    gif.addFrame(img);
-    gif.on('finished', function (blob) {
-        window.open(URL.createObjectURL(blob));
-    })
-
-    gif.render();
-}
-
-function doGiffing(gif){
-    
-}
-
-//// THE FORM CODE IS BELLOW
-
-
-
-var xy;
-
 window.addEventListener("load", function () {
-
 
     function sendData() {
         const XHR = new XMLHttpRequest();
@@ -209,8 +158,21 @@ window.addEventListener("load", function () {
     // ...and take over its submit event.
     form.addEventListener("submit", function (event) {
         event.preventDefault();
-        console.log("SUBMISSION")
+        // console.log("SUBMISSION")
+        if (document.getElementById("preview-image").getAttribute("src") == "#"){
+            alert("select image fist")
+            return;
+        }
 
         sendData();
     });
 });
+
+
+function resetform(){
+    document.getElementById("image-form").style.display = "block";
+    document.getElementById("gif-holder").style.display = "none";
+    document.getElementById("image-form").value = '';
+    document.getElementById("preview-image").setAttribute("src", '#');
+    document.getElementById("browse-label").innerHTML = "Drop or browse face";
+}

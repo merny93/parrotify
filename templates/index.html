@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
 
 
 <head>
@@ -20,7 +20,13 @@
 
 </head>
 
-<body>
+<body style="height: 100%;">
+    <div id="left-dec" class="dec">
+
+    </div>
+    <div id="right-dec" class="dec">
+
+    </div>
     <div class="container">
         <div class="row">
             <div class="col">
@@ -28,31 +34,39 @@
                     <h1>Parrotification</h1>
                     <h3> Choose a face to parrotify
                 </div>
-                <hr> <br>
+                <hr>
+                <div id="content-holder">
+                    <form id="image-form" style="height: 100%;">
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <div id="dropzone">
+                                    <div id="dropmask"></div>
+                                    <div id="dropcontent">
 
-                <form id="image-form">
-                    <div class="form-group">
-                        <div class="custom-file">
-                            <div id="dropzone">
-                                <div id="dropmask"></div>
-                                <div id="dropcontent">
-
-                                    <label for="file-input" id="browse-label">Drop or browse face</label>
-                                    <input type="file" name="image" id="file-input" />
-                                    <img src="#" id="preview-image" alt="">
+                                        <label for="file-input" id="browse-label">Drop or browse face</label>
+                                        <input type="file" name="image" id="file-input" />
+                                        <img src="#" id="preview-image" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="button-holder">
+                            <button id="submit-button" type="submit" class="btn btn-primary">Parrotify</button>
+                        </div>
+                    </form>
+                    <div id="gif-holder">
+                        <a id="finished-gif-link" style="height: 100%;" href="#" download="parrot_face.gif">
+                            <img src="#" id="finished-gif" alt="oh oh something aint right"
+                                style="border: 1px solid black;">
+                            <div class="button-holder" >
+                                <button id="download-button" class="btn btn-primary">Download</button>
+                            </div>
+                        </a>
+                        <div class="button-holder"style="bottom: -50px;">
+                            <button id="download-button" class="btn btn-secondary" onclick="resetform()">Parrotify another face!</button>
+                        </div>
                     </div>
-                    <div style="text-align: center;">
-                        <button id="submit-button" type="submit" class="btn btn-primary">Parrotify</button>
-                    </div>
-                </form>
-                <div id="gif-holder">
-                    <a id="finished-gif-link" href="#" download="parrot_face.gif">
-                        <img src="#" id="finished-gif" alt="oh oh something aint right" style="border: 1px solid black;">
-                        <button id="download-button">Download</button>
-                    </a>
+
                 </div>
 
 
