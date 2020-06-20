@@ -111,8 +111,7 @@ label {
     height: 100%;
 }
 
-<<<<<<< HEAD
-.response-btn{
+/* .response-btn{
     margin-top: 425px;
     margin-left: 6px;
     margin-right: 6px;
@@ -122,8 +121,7 @@ label {
 
 #submit-button{
     margin-top: 250px;
-}
-=======
+} */
 
 #content-holder{
     height: 475px;
@@ -155,4 +153,3 @@ label {
       display: none;
     }
   }
->>>>>>> 70a6f32ca34c10fc97d654952417ef5b44182656
