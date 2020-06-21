@@ -4,6 +4,13 @@ html {
 
 }
 
+*{
+    margin:0;
+}
+body, html{
+    height:100%;
+}
+
 .page-wrap{
     min-height: 100%;
     margin-bottom: -60px;
@@ -129,9 +136,15 @@ label {
     position: relative;
     z-index: 99;
     margin-right:12;
+    margin-left:10px;
     margin-top:6;
     font-size: 2em;
 }
+
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+  
+  
 
 #content-holder{
     height: 475px;
@@ -162,4 +175,4 @@ label {
     .dec {
       display: none;
     }
-  }
+}

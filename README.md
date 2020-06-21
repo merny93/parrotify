@@ -14,16 +14,16 @@ https://github.com/lukechilds/merge-images
 pip install -r requirements.txt  
 
 ## HOW TO START API (ON WINDOWS POWERSHELL):
-$env:FLASK_APP = "app.py"  
+$env:FLASK_APP = "main.py"  
 $env:FLASK_ENV = "development"  
 flask run  
 
 ## HOW TO START API (ON WINDOWS CMD):  
-set FLASK_APP=app.py   <- not needed if app is called app.py
+set FLASK_APP=main.py   <- not needed if app is called app.py
 set FLASK_ENV=development  
 flask run  
 
 ## ON OTHER SYSTEMS  
-export FLASK_APP=app.py  
+export FLASK_APP=main.py  
 export FLASK_ENV=development  
 flask run 

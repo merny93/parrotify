@@ -12,28 +12,29 @@
             margin:auto;
             width: 50%;
             text-align: center;
-            margin-top:20%
+            padding-top: 20%;
+            /* margin-top:20% */
         }
         .internal{
-            margin-top:40px;
+            padding-top:40px;
         }
     </style>
 </head>
 
 <body>
-
-    <div class="center">
-        <div class="internal">
-            404. Page not found.
-        </div>
-        <div class="internal">
-            <img src=" {{url_for('static', filename='confusedparrot.gif')}}" height=100 width=100>
-        </div>
-        <div class="internal">
-            <button onclick="window.location.href='/'" class="btn btn-primary">Return home</button>
+    <div class="page-wrap">
+        <div class="center">
+            <div class="internal">
+                404. Page not found.
+            </div>
+            <div class="internal">
+                <img src=" {{url_for('static', filename='confusedparrot.gif')}}" height=100 width=100>
+            </div>
+            <div class="internal">
+                <button onclick="window.location.href='/'" class="btn btn-primary">Return home</button>
+            </div>
         </div>
     </div>
-
 
     {% include "footer.html" %}
     <!-- Bootstrap js files (includes jquery and popper) -->
