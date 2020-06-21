@@ -23,6 +23,9 @@
 </head>
 
 <body style="height: 100%;">
+    <div class="page-wrap">
+
+
     <div id="left-dec" class="dec">
 
     </div>
@@ -86,6 +89,8 @@
             </div>
         </div>
     </div>
+    </div>
+
 
     {% include "footer.html" %}
 
@@ -101,7 +106,7 @@
         crossorigin="anonymous"></script>
 
     <!-- GIF.js gif encoder/decoder -->
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/gif.js') }} "></script>
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='scripts/gif.js') }} "></script> -->
 
     <!-- Site js functionality -->
     <script type="text/javascript" src="{{ url_for('static', filename='code.js') }}"></script>
