@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template, send_file, Response, make_response, url_for, send_from_directory
 from flask_cors import CORS
+from flask_api import status
 from tempfile import NamedTemporaryFile
 from shutil import copyfileobj
 from os import remove
@@ -43,6 +44,9 @@ imageObject = Image.open("parrot.gif")
 #       return;
 #     }
 
+
+
+
 @app.route('/')
 def splash():
     return render_template('index.html')
@@ -57,19 +61,25 @@ def get_shared_image(image_id):
 
 @app.route('/parrotify', methods=['POST'])
 def parrotify():
-    if not request.files:
-        return "sad noises"    
 
+    error = {
+        'success': False,
+        'error':  "something aint right"
+        }
+
+
+    if not request.files:
+        return jsonify("Bad"), status.HTTP_500_INTERNAL_SERVER_ERROR
     image = request.files['image']
-    file_type = image.mimetype.split("/")[-1]
-    good_files = ['jpg', 'png', 'jpeg']
+    file_type = image.mimetype.split("/")[-1].lower()
+    good_files = ['jpg', 'jpeg','jpe','jif','jfif','jfi', 'png', 'heic', 'webp', 'tiff', 'tif', 'heif']
     if file_type not in good_files:
-        return "sad noises"
+        return jsonify("Bad"), status.HTTP_500_INTERNAL_SERVER_ERROR
     #nameExt = image.filename
     try:
         face = Image.open(image)
     except:
-        return "sadness noises"
+        return jsonify("Bad"), status.HTTP_500_INTERNAL_SERVER_ERROR
     face_size = face.size
     pix_count = face_size[0] * face_size[1]
     scale = np.sqrt(10e3 / pix_count)
@@ -81,7 +91,7 @@ def parrotify():
     try:
         box = boxes[0].tolist()
     except:
-        return "sadness noises"
+        return jsonify("Bad"), status.HTTP_500_INTERNAL_SERVER_ERROR
     face = face.crop(tuple([int(box[x]/scale) for x in range(4)]))
     size= imageObject.size
     new_size = [int(0.6 * x) for x in size]
