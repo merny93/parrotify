@@ -13,3 +13,6 @@ handlers:
   script: auto
 
 instance_class: F4_1G
+
+- name: Setup gcloud environment
+  uses: GoogleCloudPlatform/github-actions@0.1.2
