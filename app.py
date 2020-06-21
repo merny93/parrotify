@@ -1,20 +1,13 @@
-from flask import Flask, request, jsonify, render_template, send_file, Response, make_response, url_for, send_from_directory
+from flask import Flask, request, jsonify, render_template, send_file
 from flask_cors import CORS
 from flask_api import status
-from tempfile import NamedTemporaryFile
-from shutil import copyfileobj
-from os import remove
 # Reading an animated GIF file using Python Image Processing Library - Pillow
-from io import StringIO
-from PIL import Image, ImagePalette
-
-from PIL import GifImagePlugin
+from PIL import Image
 
 from io import BytesIO
 
 import numpy as np
- 
-import sys
+
 
 from facenet_pytorch import MTCNN
 import cv2 as cv
@@ -32,17 +25,6 @@ CORS(app)
 mtcnn = MTCNN(keep_all=True, device='cpu')
 
 imageObject = Image.open("parrot.gif")
-# nameExt = str(sys.argv[1])
-# file_name = "faces/"+nameExt
-
-
-#  if (req.file.size === MAX_SIZE) {
-#       try {
-#         fs.unlink(req.file.path, (err) => {});
-#       } catch {}
-#       res.status(400).send("File too big. Max size: 3MB");
-#       return;
-#     }
 
 
 
