@@ -27,8 +27,6 @@ mtcnn = MTCNN(keep_all=True, device='cpu')
 imageObject = Image.open("parrot.gif")
 
 
-
-
 @app.route('/')
 def splash():
     return render_template('index.html')
@@ -43,12 +41,6 @@ def get_shared_image(image_id):
 
 @app.route('/parrotify', methods=['POST'])
 def parrotify():
-
-    error = {
-        'success': False,
-        'error':  "something aint right"
-        }
-
 
     if not request.files:
         return jsonify("Bad"), status.HTTP_500_INTERNAL_SERVER_ERROR
