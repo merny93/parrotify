@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <title>Not found</title>
     <!-- Bootstrap css -->
     <link rel="stylesheet" type = "text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <!-- Custom site css -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    <style>
 
+    {% include "favicons.html" %}
+
+    <style>
         .center{
             margin:auto;
             width: 50%;
@@ -28,7 +31,7 @@
                 404. Page not found.
             </div>
             <div class="internal">
-                <img src=" {{url_for('static', filename='confusedparrot.gif')}}" height=100 width=100>
+                <img src=" {{url_for('static', filename='confusedparrot.gif')}}" alt="confusedparrot" height=100 width=100>
             </div>
             <div class="internal">
                 <button onclick="window.location.href='/'" class="btn btn-primary">Return home</button>

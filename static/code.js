@@ -15,14 +15,8 @@ var imageForm = document.getElementById("image-form")
 var gifHolder = document.getElementById("gif-holder")
 var previewImage = document.getElementById("preview-image")
 
-
 //***************************************** */
 //code to handle the hover stuff
-
-//not gonna lie i have no clue why we need this but we simply do 
-//jkjk it initiates the mask as hidden since we have no need for it  
-// dropMask.classList.add('hidden');
-
 var drag_over = function(e) {
     e.stopPropagation();
     e.preventDefault();
@@ -65,7 +59,6 @@ function reset_click(){
     closeImageBtn.classList.add('hidden')
 }
 
-
 /// code to get the input and send over
 fileInput.addEventListener("change", function () {
     if (fileInput.files && fileInput.files[0]) {
@@ -106,8 +99,6 @@ fileInput.addEventListener("change", function () {
 //     xmlHttp.send(null);
 // }
 
-
-
 window.addEventListener("load", function () {
 
     function sendData() {
@@ -142,9 +133,6 @@ window.addEventListener("load", function () {
         // The data sent is what the user provided in the form
         XHR.send(FD);
     }
-
-    // Access the form element...
-    // const form = document.getElementById("image-form");
 
     // ...and take over its submit event.
     imageForm.addEventListener("submit", function (event) {
