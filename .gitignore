@@ -1,7 +1,7 @@
-*.gif
-*.jpg
-*.png
-*.jfif
+# *.gif
+# *.jpg
+# *.png
+# *.jfif
 *.pyc
 !parrot.gif
 !parrot16.png

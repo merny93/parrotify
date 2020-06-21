@@ -75,13 +75,13 @@ document.getElementById('file-input').addEventListener("change", function () {
             return;
         }
 
-        let extension = input.files[0].name.split('.').pop();
-        if (extension != 'jpg' && extension != 'jpeg' && extension != 'png' && extension != 'gif'){
-            input.value = '';
-            document.getElementById("preview-image").setAttribute("src", '#');
-            alert("File format not supported. Please use gif, jpg, or png.")
-            return;
-        }
+        // let extension = input.files[0].name.split('.').pop();
+        // if (extension != 'jpg' && extension != 'jpeg' && extension != 'png' && extension != 'HEIC'){
+        //     input.value = '';
+        //     document.getElementById("preview-image").setAttribute("src", '#');
+        //     alert("File format not supported. Please use gif, jpg, or png.")
+        //     return;
+        // }
         // let reader = new FileReader();
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -105,37 +105,6 @@ function httpGetAsync(theUrl, callback) {
 }
 
 
-function processImageCallback(response) {
-    let text = response.responseText;
-    console.log(text)
-    let dicks = JSON.parse(text);
-    // console.log(dicks)
-}
-
-function getImage(url) {
-    return new Promise((resolve, reject) => {
-        let request = new XMLHttpRequest();
-        request.open('GET', url);
-        request.responseType = 'blob';
-
-        request.onload = () => {
-            if (request.status === 200) {
-                resolve(request.response)
-            }
-            else {
-                reject(new Error('Couldn\'t load image. Code' + request.statusText))
-            }
-        };
-
-        request.onerror = () => {
-            reject(new Error('Error loading image.'));
-        }
-
-        request.send();
-
-    })
-}
-
 
 window.addEventListener("load", function () {
 
@@ -146,7 +115,11 @@ window.addEventListener("load", function () {
         xy = FD;
         // Define what happens on successful data submission
         XHR.addEventListener("load", function (event) {
-
+            // alert(this.response.status)
+            if (this.status == 500){
+                alert("brosky");
+                return;
+            }
             let img = document.getElementById("finished-gif");
             img.src = URL.createObjectURL(this.response);
             let aTag = document.getElementById("finished-gif-link");
@@ -157,7 +130,7 @@ window.addEventListener("load", function () {
 
         // Define what happens in case of error
         XHR.addEventListener("error", function (event) {
-            alert('Oops! Something went wrong.');
+            alert('Oops! Something went wrong.')
         });
 
         // Set up our request

@@ -111,13 +111,20 @@ label {
     height: 100%;
 }
 
-#close-image-btn{
-    z-index: 99; position:relative; margin-right: 10px; margin-top:8px;
-    width:30px;
-    height:30px;
-    font-size: 2em;
-
+.response-btn{
+    margin-top: 425px;
+    margin-left: 6px;
+    margin-right: 6px;
 }
+
+#close-image-btn{
+    position: relative;
+    z-index: 99;
+    margin-right:12;
+    margin-top:6;
+    font-size: 2em;
+}
+
 
 #content-holder{
     height: 475px;
