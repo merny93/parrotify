@@ -115,7 +115,7 @@ window.addEventListener("load", function () {
         xy = FD;
         // Define what happens on successful data submission
         XHR.addEventListener("load", function (event) {
-            alert(this.response.status)
+            // alert(this.response.status)
             if (this.response.status == 500){
                 alert("brosky");
                 return;
