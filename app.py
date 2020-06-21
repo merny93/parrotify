@@ -44,11 +44,6 @@ def get_shared_image(image_id):
 @app.route('/parrotify', methods=['POST'])
 def parrotify():
 
-    error = {
-        'success': False,
-        'error':  "something aint right"
-        }
-
 
     if not request.files:
         return jsonify("Bad"), status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -73,7 +68,8 @@ def parrotify():
     try:
         box = boxes[0].tolist()
     except:
-        return jsonify("Bad"), status.HTTP_500_INTERNAL_SERVER_ERROR
+        return "Bad", status.HTTP_500_INTERNAL_SERVER_ERROR
+    
     face = face.crop(tuple([int(box[x]/scale) for x in range(4)]))
     size= imageObject.size
     new_size = [int(0.6 * x) for x in size]

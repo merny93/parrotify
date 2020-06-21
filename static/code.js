@@ -105,6 +105,7 @@ function httpGetAsync(theUrl, callback) {
 }
 
 
+var x;
 
 window.addEventListener("load", function () {
 
@@ -115,8 +116,10 @@ window.addEventListener("load", function () {
         xy = FD;
         // Define what happens on successful data submission
         XHR.addEventListener("load", function (event) {
+            x= this;
             // alert(this.response.status)
-            if (this.response.status == 500){
+            if (this.status == 500){
+                console.log("bro")
                 alert("brosky");
                 return;
             }
@@ -130,7 +133,8 @@ window.addEventListener("load", function () {
 
         // Define what happens in case of error
         XHR.addEventListener("error", function (event) {
-            alert('Oops! Something went wrong.')
+            console.log("fucked up");
+            alert('Oops! Something went wrong.');
         });
 
         // Set up our request
