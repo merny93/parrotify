@@ -111,6 +111,7 @@ label {
     height: 100%;
 }
 
+<<<<<<< HEAD
 .response-btn{
     margin-top: 425px;
     margin-left: 6px;
@@ -118,9 +119,14 @@ label {
 }
 
 
+=======
+#close-image-btn{
+    z-index: 99; position:relative; margin-right: 10px; margin-top:8px;
+    width:30px;
+    height:30px;
+    font-size: 2em;
+>>>>>>> 022d67f013b1323226e5c495ba73fc6153d97329
 
-#submit-button{
-    margin-top: 250px;
 }
 
 #content-holder{

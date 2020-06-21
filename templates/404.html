@@ -8,28 +8,29 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <style>
 
-        .center-horizontally{
-            display: inline;
+        .center{
+            margin:auto;
+            width: 50%;
             text-align: center;
+            margin-top:20%
         }
-        .container{
-            display: flex;
-            align-items:center;
+        .internal{
+            margin-top:40px;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <div>
+    <div class="center">
+        <div class="internal">
             404. Page not found.
         </div>
-        <div>
+        <div class="internal">
             <img src=" {{url_for('static', filename='confusedparrot.gif')}}" height=100 width=100>
         </div>
-        <div>
-            <button class="btn btn-primary">Return to home</button>
+        <div class="internal">
+            <button onclick="window.location.href='/'" class="btn btn-primary">Return home</button>
         </div>
     </div>
 
