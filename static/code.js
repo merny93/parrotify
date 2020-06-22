@@ -14,10 +14,13 @@ var fileInput = document.getElementById("file-input")
 var imageForm = document.getElementById("image-form")
 var gifHolder = document.getElementById("gif-holder")
 var previewImage = document.getElementById("preview-image")
+var browseLabel = document.getElementById("browse-label")
 
 //***************************************** */
 //code to handle the hover stuff
 var drag_over = function(e) {
+    console.log("dragover")
+
     e.stopPropagation();
     e.preventDefault();
     dropArea.classList.add('hover');
@@ -25,6 +28,8 @@ var drag_over = function(e) {
 };
 
 var drag_leave = function(e) {
+    console.log("dragleave")
+
     e.stopPropagation();
     e.preventDefault();
     dropArea.classList.remove('hover');
@@ -33,10 +38,12 @@ var drag_leave = function(e) {
 };
 
 var drag_drop = function(e){
+    console.log("dragdrop")
+
     e.stopPropagation();
     e.preventDefault();	
     dropArea.classList.remove('hover');
-    // document.getElementById("dropmask").classList.add('hidden');
+    document.getElementById("dropmask").classList.add('hidden');
     fileInput.files = e.dataTransfer.files;
     fileInput.dispatchEvent(new Event('change'));
 };
@@ -54,9 +61,10 @@ function reset_click(){
     gifHolder.style.display = "none";
     previewImage.setAttribute("src", '#');
     dropMask.classList.add('hidden');
-    fileInput.labels[0].classList.remove("hidden");
+    fileInput.classList.remove("hidden");
     imageForm.reset();
     closeImageBtn.classList.add('hidden')
+    browseLabel.classList.remove('hidden')
 }
 
 /// code to get the input and send over
@@ -81,7 +89,8 @@ fileInput.addEventListener("change", function () {
         var reader = new FileReader();
         reader.onload = function (e) {
             previewImage.setAttribute("src", e.target.result);
-            fileInput.labels[0].classList.add("hidden");//`${input.files[0].name} (${input.files[0].size} bytes)`;
+            fileInput.classList.add("hidden");//`${input.files[0].name} (${input.files[0].size} bytes)`;
+            browseLabel.classList.add('hidden')
             closeImageBtn.classList.remove("hidden");
         }
         
@@ -105,7 +114,6 @@ window.addEventListener("load", function () {
         const XHR = new XMLHttpRequest();
         // Bind the FormData object and the form element
         const FD = new FormData(imageForm);
-        xy = FD;
         // Define what happens on successful data submission
         XHR.addEventListener("load", function (event) {
             // alert(this.response.status)
