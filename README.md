@@ -1,7 +1,8 @@
 # Live site
-Now live at [parrotify.me](http://parrotify.me)
+Now live at [parrotify.me](http://parrotify.me)!
 
 
+# Running the site on Flask
 run the thing needs add the name
 
 https://github.com/blueimp/JavaScript-Load-Image
