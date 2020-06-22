@@ -1,4 +1,4 @@
 steps:
-- name: "gcr.io/parrotify/gcloud"
-  args: ["app", "deploy"]
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy","--project=parrotify"]
 timeout: "1600s"
