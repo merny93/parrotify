@@ -7,7 +7,7 @@ from PIL import Image
 from io import BytesIO
 
 import numpy as np
-
+import traceback
 
 from facenet_pytorch import MTCNN
 import cv2 as cv
@@ -26,7 +26,15 @@ mtcnn = MTCNN(keep_all=True, device='cpu')
 
 imageObject = Image.open("parrot.gif")
 
+def identifyFace():
+    pass
 
+def superimpose():
+    pass
+
+
+@app.route('/home')
+@app.route('/index')
 @app.route('/')
 def splash():
     return render_template('index.html')
@@ -37,18 +45,23 @@ def page_not_found(e):
 
 @app.route('/share/<image_id>')
 def get_shared_image(image_id):
-    return escape(image_id)
+    return render_template('share.html', image_id=image_id)
 
 @app.route('/parrotify', methods=['POST'])
 def parrotify():
+    if not request.files:
+        return jsonify("No file received"), status.HTTP_400_BAD_REQUEST
+
     try:
-        if not request.files:
-            return jsonify("No file received"), status.HTTP_500_INTERNAL_SERVER_ERROR
         image = request.files['image']
         file_type = image.mimetype.split("/")[-1].lower()
         good_files = ['jpg', 'jpeg','jpe','jif','jfif','jfi', 'png', 'heic', 'webp', 'tiff', 'tif', 'heif']
         if file_type not in good_files:
-            return jsonify("Unsupported file type"), status.HTTP_500_INTERNAL_SERVER_ERROR
+            return jsonify("Unsupported file type"), status.HTTP_400_BAD_REQUEST
+    except Exception as ex:
+        print(ex)
+    
+    try:
         #nameExt = image.filename
         try:
             face = Image.open(image)
@@ -80,7 +93,6 @@ def parrotify():
 
         for x, col in enumerate(face_mask):
             for y, val in enumerate(col):
-
                 if elipse(x,y,np.shape(face_mask)) < 1:
                     face_mask[x,y] = 255
                 else:
@@ -95,7 +107,6 @@ def parrotify():
         # find the nose
         background=[]
         for frame in range(0, imageObject.n_frames):
-
             imageObject.seek(frame)
             background.append(imageObject.convert("RGBA"))
             pixs = imageObject.getdata(0)
@@ -155,11 +166,11 @@ def parrotify():
         # print("saved as: " + 'out/'+nameExt.split('.')[0]+'.gif')
 
         return send_file(bytesObject, attachment_filename= "namey.gif", mimetype='image/gif', as_attachment=True)
-    except:
-        return "Really bad error (have no clue what went wront but it did.", status.HTTP_500_INTERNAL_SERVER_ERROR
+    except Exception as ex:
+        print(ex)
+        traceback.print_exc()
+        return "Really bad error (have no clue what went wront but it did).", status.HTTP_500_INTERNAL_SERVER_ERROR
 
 # running REST interface, port=5000 for direct test, port=5001 for deployment from PM2
 if __name__ == "__main__":
     app.run(debug=False, port=5000)
-
-
