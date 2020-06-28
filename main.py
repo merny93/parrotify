@@ -7,7 +7,7 @@ from flask_api import status
 
 from io import BytesIO
 
-import file_tools
+import file_tools as ft
 
 # from share_blueprint import fuck_ur_shit
 from share_blueprint import share_blueprint
@@ -24,12 +24,6 @@ SHARE_DIR = "raw_gif"
 from markupsafe import escape
 
 from image_helper import make_parrot
-
-## PURGATORY: mimetypes ##
-# Add support for interpreting common web types without relying on system registry
-# import mimetypes
-# mimetypes.add_type("text/css", ".css")
-# mimetypes.add_type("text/javascript", ".js")
 
 ##init the flask app
 app = Flask(__name__)
@@ -51,10 +45,6 @@ def splash():
 def page_not_found(e):
     return render_template('404.html'), 404
 
-##testing will remove later TODO: remove
-@app.route('/red', methods=['GET'])
-def red_test():
-    return app.root_path
 
 
 ##main post request for parrotifying the image
@@ -68,11 +58,11 @@ def parrotify():
     except Exception as ex:
         return str(ex), status.HTTP_500_INTERNAL_SERVER_ERROR
 
-
-    file_id = file_tools.generate_resource_id() 
+    file_id = ft.generate_resource_id() 
     file_name = file_id + ".gif"
+    ft.save_new_gif(file_name)
     raw_gif_location = SHARE_DIR + "/" + file_name
-    share_link = "http://parrotify.me/share/"+file_id
+    share_link = request.url_root + "share/"+file_id
 
     gif[0].save(
             os.path.join(app.root_path, SHARE_DIR, file_name),
@@ -95,30 +85,3 @@ def parrotify():
 # running REST interface, port=5000 for direct test, port=5001 for deployment from PM2
 if __name__ == "__main__":
     app.run(debug=False, port=5000)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # bytesObject = BytesIO()
-    # gif[0].save(
-    #         bytesObject,
-    #         format = 'GIF',
-    #         save_all = True,
-    #         disposal=2,
-    #         append_images = gif[1:] ) # [background[x] for x in range(imageObject.n_frames)])
-    # bytesObject.seek(0,0)
-
-    # return send_file(bytesObject, attachment_filename= "namey.gif", mimetype='image/gif', as_attachment=True)

@@ -102,15 +102,6 @@ fileInput.addEventListener("change", function () {
     }
 })
 
-// function httpGetAsync(theUrl, callback) {
-//     var xmlHttp = new XMLHttpRequest();
-//     xmlHttp.onreadystatechange = function () {
-//         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-//             callback(xmlHttp);
-//     }
-//     xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-//     xmlHttp.send(null);
-// }
 
 function copyToClipboard() {
     console.log("copy to clipboard btccchhhh");
@@ -120,7 +111,6 @@ function copyToClipboard() {
     alert("Image copied to clipboard");
 }
 
-
 window.addEventListener("load", function () {
 
     function sendData() {
@@ -129,8 +119,6 @@ window.addEventListener("load", function () {
         const FD = new FormData(imageForm);
         // Define what happens on successful data submission
         XHR.addEventListener("load", function (event) {
-
-            xk = this.response
             // alert(this.response.status)
             if (this.status == 500){
                 alert(this.response);
@@ -141,15 +129,15 @@ window.addEventListener("load", function () {
                 return;
             }
 
+            let response_obj = this.response;
 
-            let imageId = this.HEADERS_RECEIVED.location;
-            console.log(imageId);
             let img = document.getElementById("finished-gif");
             img.src = this.getResponseHeader("Location")
 
             console.log(this)
             let aTag = document.getElementById("finished-gif-link");
             aTag.setAttribute("href", img.src);
+            document.getElementById("share-link").setAttribute("href", response_obj.share_link)
             imageForm.style.display = "none"
             gifHolder.style.display = "block"
         });
@@ -161,7 +149,7 @@ window.addEventListener("load", function () {
 
         // Set up our request
         XHR.open("POST", "/parrotify");
-        XHR.responseType = "text";
+        XHR.responseType = "json";
 
         // The data sent is what the user provided in the form
         XHR.send(FD);
