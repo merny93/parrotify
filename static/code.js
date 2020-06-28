@@ -15,6 +15,9 @@ var imageForm = document.getElementById("image-form")
 var gifHolder = document.getElementById("gif-holder")
 var previewImage = document.getElementById("preview-image")
 var browseLabel = document.getElementById("browse-label")
+var finishedGif =document.getElementById("finished-gif")
+
+var image_url = "";
 
 //***************************************** */
 //code to handle the hover stuff
@@ -65,6 +68,7 @@ function reset_click(){
     imageForm.reset();
     closeImageBtn.classList.add('hidden')
     browseLabel.classList.remove('hidden')
+    image_url = ""
 }
 
 /// code to get the input and send over
@@ -108,6 +112,15 @@ fileInput.addEventListener("change", function () {
 //     xmlHttp.send(null);
 // }
 
+function copyToClipboard() {
+    console.log("copy to clipboard btccchhhh");
+    var img = document.getElementById("finished-gif");
+    img.select();
+    document.execCommand("copy");
+    alert("Image copied to clipboard");
+}
+
+
 window.addEventListener("load", function () {
 
     function sendData() {
@@ -116,13 +129,25 @@ window.addEventListener("load", function () {
         const FD = new FormData(imageForm);
         // Define what happens on successful data submission
         XHR.addEventListener("load", function (event) {
+
+            xk = this.response
             // alert(this.response.status)
             if (this.status == 500){
-                alert("brosky");
+                alert(this.response);
                 return;
             }
+            if (this.status != 201){
+                alert(this.response);
+                return;
+            }
+
+
+            let imageId = this.HEADERS_RECEIVED.location;
+            console.log(imageId);
             let img = document.getElementById("finished-gif");
-            img.src = URL.createObjectURL(this.response);
+            img.src = this.getResponseHeader("Location")
+
+            console.log(this)
             let aTag = document.getElementById("finished-gif-link");
             aTag.setAttribute("href", img.src);
             imageForm.style.display = "none"
@@ -136,7 +161,7 @@ window.addEventListener("load", function () {
 
         // Set up our request
         XHR.open("POST", "/parrotify");
-        XHR.responseType = "blob";
+        XHR.responseType = "text";
 
         // The data sent is what the user provided in the form
         XHR.send(FD);

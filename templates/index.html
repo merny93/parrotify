@@ -64,9 +64,11 @@
                     </form>
                     <div id="gif-holder">
                             <img src="#" id="finished-gif" alt="oh oh something aint right"
-                                style="border: 1px solid grey;">
-                            <div class="button-holder" >
+                                style="border: 1px solid grey;" onclick="copyToClipboard()">
+                            <div class="button-holder">
                                 <a id="finished-gif-link" class="btn btn-primary" href="#" download="parrot_face.gif">Download </a>
+                                <div id="share-popout" class = "btn btn-primary"> Link to share image</div>
+                                <!-- <div id="share-popup" class="btn btn-primary" href="#" download="parrot_face.gif">Download </a> -->
                             </div>
                         <div class="button-holder" style="bottom: -50px;">
                             <button class="btn btn-secondary" onclick="reset_click()">Parrotify another face!</button>
