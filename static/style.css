@@ -16,6 +16,7 @@ html {
 .page-wrap {
     min-height: 100%;
     margin-bottom: -60px;
+    height: 100%;
 }
 
 .page-wrap:after {
@@ -200,4 +201,8 @@ label {
     .dec {
         display: none;
     }
+}
+
+#conga-row-container{
+    max-height: 60px;
 }

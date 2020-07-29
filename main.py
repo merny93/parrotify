@@ -1,6 +1,6 @@
 """ Module docstring so pylint stops getting mad at me """
 
-from flask import Flask, request, jsonify, render_template, send_file, make_response
+from flask import Flask, request, jsonify, render_template, send_file, make_response, send_from_directory
 from flask_cors import CORS
 from flask_api import status
 # Reading an animated GIF file using Python Image Processing Library - Pillow
@@ -47,6 +47,7 @@ def page_not_found(e):
 
 
 
+
 ##main post request for parrotifying the image
 @app.route('/parrotify', methods=['POST'])
 def parrotify():
@@ -56,6 +57,7 @@ def parrotify():
     try:
         gif = make_parrot(request.files['image'])
     except Exception as ex:
+        print(ex)
         return str(ex), status.HTTP_500_INTERNAL_SERVER_ERROR
 
     file_id = ft.generate_resource_id() 
