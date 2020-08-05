@@ -180,7 +180,6 @@ function copyFunction(){
     var tempEl = document.createElement("textarea");
     document.body.appendChild(tempEl);
     tempEl.value = imageLink;
-    tempEl.style.display = "none";
 
 
   /* Select the text field */
@@ -189,6 +188,8 @@ function copyFunction(){
 
   /* Copy the text inside the text field */
   document.execCommand("copy");
+
+  tempEl.style.display = "none";
 
   var tooltip = document.getElementById("tool-tip");
   tooltip.innerHTML = "Copied Link!";
