@@ -110,7 +110,7 @@ function copyToClipboard() {
     document.execCommand("copy");
     alert("Image copied to clipboard");
 }
-
+var xz;
 window.addEventListener("load", function () {
 
     function sendData() {
@@ -121,6 +121,7 @@ window.addEventListener("load", function () {
         XHR.addEventListener("load", function (event) {
             // alert(this.response.status)
             if (this.status == 500){
+                xz = this;
                 alert(this.response);
                 return;
             }

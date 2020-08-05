@@ -22,7 +22,7 @@ def unpack_image(image_object):
         raise Exception("Unsupported file type")
     
     try:
-        face = Image.open(image_object)
+        face = Image.open(image_object).convert("RGB")
     except:
         raise Exception("Failed to open image")
     return face
