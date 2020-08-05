@@ -177,15 +177,23 @@ window.addEventListener("load", function () {
 
 function copyFunction(){
     /* Get the text field */
+    var tempEl = document.createElement("textarea");
+    document.body.appendChild(tempEl);
+    tempEl.value = imageLink;
+    tempEl.style.display = "none";
 
 
   /* Select the text field */
-  imageLink.select();
-  imageLink.setSelectionRange(0, 99999); /*For mobile devices*/
+  tempEl.select();
+  tempEl.setSelectionRange(0, 99999); /*For mobile devices*/
 
   /* Copy the text inside the text field */
   document.execCommand("copy");
 
-  /* Alert the copied text */
-  alert("Copied the text: " + imageLink.value);
+  var tooltip = document.getElementById("tool-tip");
+  tooltip.innerHTML = "Copied Link!";
+  tooltip.style.display = "block"; 
+
+  setTimeout(function(){ tooltip.style.display = "none";}, 500);
 }
+

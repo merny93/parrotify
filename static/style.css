@@ -207,41 +207,25 @@ label {
     max-height: 60px;
 }
 
-
-.tooltip {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .tooltip .tooltiptext {
+#share-link .tooltiptext {
     visibility: hidden;
-    width: 140px;
-    background-color: #555;
+    width: 120px;
+    background-color: black;
     color: #fff;
     text-align: center;
     border-radius: 6px;
-    padding: 5px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
     position: absolute;
     z-index: 1;
-    bottom: 150%;
+    bottom: 100%;
     left: 50%;
-    margin-left: -75px;
-    opacity: 0;
-    transition: opacity 0.3s;
+    margin-left: -60px;
+
+    display: none;
   }
   
-  .tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-  }
-  
-  .tooltip:hover .tooltiptext {
+  #share-link:hover .tooltiptext {
     visibility: visible;
-    opacity: 1;
   }
