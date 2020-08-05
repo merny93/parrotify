@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+
 html {
     position: relative;
     min-height: 100%;
@@ -11,12 +14,23 @@ html {
 body,
 html {
     height: 100%;
+    font-family: 'Comic Neue', cursive;
+    background-color: rgb(255, 212, 246);
 }
 
 .page-wrap {
     min-height: 100%;
     margin-bottom: -60px;
     height: 100%;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 700;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 .page-wrap:after {
@@ -29,8 +43,16 @@ html {
     height: 60px;
 }
 
+.btn-primary {
+    background-color: rgb(161, 13, 149);
+    border: none;
+}
+
+/* a { color: inherit; } */
+
+
 .site-footer {
-    background-color: #f5f5f5;
+    background-color: #f5f5f5a6;
     text-align: center;
     line-height: 60px;
 }
@@ -49,21 +71,27 @@ html {
 
 }
 
+/* .btn-primary {
+    background-color: #F7AEF8;
+    border-color: gray;
+} */
+
 .container{
     margin-bottom:20px;
 }
 #dropzone {
     /* box-sizing: border-box; */
 
-
-    background-color: #f4f4f4;
-    outline: 2px dashed black;
+    background-color: #f8f8f8ab;
+    border: 2px dashed black;
     height: 400px;
-    width: 400px;
+    width: 100%;
+    border-radius: 25px;
+    margin: auto;
 
     left: 50%;
-    margin-left: -200px;
-    position: absolute;
+    /* margin-left: -200px; */
+    /* position: absolute; */
 
     display: flex;
     justify-content: center;
@@ -172,7 +200,7 @@ label {
 
 #content-holder {
     height: 475px;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .button-holder {
