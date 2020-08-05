@@ -32,11 +32,10 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div style="text-align: center;">
-                    <h1>Parrotify.me</h1>
-                    <h3>Choose a face to parrotify</h3>
+                <div style="margin-top: 20px">
+                    <a href="/"><h4>parrotify.me</h4></a>
                 </div>
-                <hr>
+                <!-- <hr> -->
                 <div id="content-holder">
                     <form id="image-form" style="height: 100%;">
                         <div class="form-group">
@@ -52,19 +51,21 @@
                                     <div id="dropcontent">
                                         <!-- <label for="file-input" id="browse-label">Drop or browse photo</label> -->
 																				<input type="file" name="image" id="file-input" accept="image/*"/>
-																				<span id="browse-label">Drop or browse photo</span>
+																				<span id="browse-label">drop or select photo</span>
                                         <img src="#" id="preview-image" alt="">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="button-holder">
-                            <button id="submit-button" type="submit" class="block btn btn-primary">Parrotify</button>
+                            <button id="submit-button" type="submit" class="btn btn-primary">
+                                <img src="{{ url_for('static', filename='parrot.gif') }}" height="20px" style="margin-top:-5px; margin-bottom: 2px"> parrotify
+                            </button>
                         </div>
                     </form>
                     <div id="gif-holder">
                             <img src="#" id="finished-gif" alt="oh oh something aint right"
-                                style="border: 1px solid grey;" onclick="copyToClipboard()">
+                                onclick="copyToClipboard()">
                             <div class="button-holder">
                                 <a id="finished-gif-link" class="btn btn-primary" href="#" download="parrot_face.gif">Download </a>
                                 <a id="share-link" href="#" class = "btn btn-primary" onclick="copyFunction()"> Link to share image <span class="tooltiptext" id="tool-tip">Tooltip text</span></a>
