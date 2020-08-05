@@ -62,17 +62,23 @@
                                 <img src="{{ url_for('static', filename='parrot.gif') }}" height="20px" style="margin-top:-5px; margin-bottom: 2px"> parrotify
                             </button>
                         </div>
+                        <div id="loader-holder">
+                            <div class="loader">Loading...</div>
+                        </div>
                     </form>
+                    <!-- <div id="loading-holder">
+                        <img id="loading-image" src="{{ url_for('static', filename='parrot.gif') }}">
+                    </div> -->
                     <div id="gif-holder">
                             <img src="#" id="finished-gif" alt="oh oh something aint right"
                                 onclick="copyToClipboard()">
                             <div class="button-holder">
-                                <a id="finished-gif-link" class="btn btn-primary" href="#" download="parrot_face.gif">Download </a>
-                                <a id="share-link" href="#" class = "btn btn-primary" onclick="copyFunction()"> Link to share image <span class="tooltiptext" id="tool-tip">Tooltip text</span></a>
+                                <a id="finished-gif-link"  href="#" download="parrot_face.gif">Download </a>
+                                <a id="share-link" href="#" onclick="copyFunction()"> Copy link <span class="tooltiptext" id="tool-tip">Tooltip text</span></a>
                                 <!-- <div id="share-popup" class="btn btn-primary" href="#" download="parrot_face.gif">Download </a> -->
                             </div>
                         <div class="button-holder" style="bottom: -50px;">
-                            <button class="btn btn-secondary" onclick="reset_click()">Parrotify another face!</button>
+                            <button class="btn btn-secondary" onclick="location.reload()">Parrotify another face!</button>
                         </div>
                     </div>
 
@@ -81,6 +87,7 @@
             </div>
         </div>
     </div>
+    
 
 
     {% include "footer.html" %}

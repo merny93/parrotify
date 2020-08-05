@@ -55,21 +55,6 @@ dropArea.addEventListener('dragover', drag_over, false);
 dropMask.addEventListener('dragleave',drag_leave, false);
 dropMask.addEventListener('drop', drag_drop, false);
 
-function share_click(){
-    //console.log(this);
-}
-
-function reset_click(){
-    imageForm.style.display = "block";
-    gifHolder.style.display = "none";
-    previewImage.setAttribute("src", '#');
-    dropMask.classList.add('hidden');
-    fileInput.classList.remove("hidden");
-    imageForm.reset();
-    closeImageBtn.classList.add('hidden')
-    browseLabel.classList.remove('hidden')
-    image_url = ""
-}
 
 /// code to get the input and send over
 fileInput.addEventListener("change", function () {
@@ -143,6 +128,10 @@ window.addEventListener("load", function () {
             aTag.setAttribute("href", img.src);
             imageLink = response_obj.share_link;
             //document.getElementById("share-link").setAttribute("href", response_obj.share_link)
+            //this is where we should hide the loading bar
+            console.log("loading end");
+            
+            document.getElementById("loader-holder").style.display = "none";
             imageForm.style.display = "none"
             gifHolder.style.display = "block"
         });
@@ -169,8 +158,12 @@ window.addEventListener("load", function () {
         }
 
         //console.log("SUBMISSION")
-
+        //loading bar should appear here and fo
+        document.getElementById("submit-button").style.display = "none";
+        document.getElementById("loader-holder").style.display = "block";
+        console.log("loading start");
         sendData();
+        
     });
 });
 
