@@ -22,7 +22,7 @@ var image_url = "";
 //***************************************** */
 //code to handle the hover stuff
 var drag_over = function(e) {
-    console.log("dragover")
+    //console.log("dragover")
 
     e.stopPropagation();
     e.preventDefault();
@@ -31,7 +31,7 @@ var drag_over = function(e) {
 };
 
 var drag_leave = function(e) {
-    console.log("dragleave")
+    //console.log("dragleave")
 
     e.stopPropagation();
     e.preventDefault();
@@ -41,7 +41,7 @@ var drag_leave = function(e) {
 };
 
 var drag_drop = function(e){
-    console.log("dragdrop")
+    //console.log("dragdrop")
 
     e.stopPropagation();
     e.preventDefault();	
@@ -56,7 +56,7 @@ dropMask.addEventListener('dragleave',drag_leave, false);
 dropMask.addEventListener('drop', drag_drop, false);
 
 function share_click(){
-    console.log(this);
+    //console.log(this);
 }
 
 function reset_click(){
@@ -111,6 +111,9 @@ function copyToClipboard() {
     alert("Image copied to clipboard");
 }
 var xz;
+
+
+var imageLink;
 window.addEventListener("load", function () {
 
     function sendData() {
@@ -122,7 +125,7 @@ window.addEventListener("load", function () {
             // alert(this.response.status)
             if (this.status == 500){
                 xz = this;
-                alert(this.response);
+                alert(this.response.exception);
                 return;
             }
             if (this.status != 201){
@@ -135,10 +138,11 @@ window.addEventListener("load", function () {
             let img = document.getElementById("finished-gif");
             img.src = this.getResponseHeader("Location")
 
-            console.log(this)
+            //console.log(this)
             let aTag = document.getElementById("finished-gif-link");
             aTag.setAttribute("href", img.src);
-            document.getElementById("share-link").setAttribute("href", response_obj.share_link)
+            imageLink = response_obj.share_link;
+            //document.getElementById("share-link").setAttribute("href", response_obj.share_link)
             imageForm.style.display = "none"
             gifHolder.style.display = "block"
         });
@@ -160,12 +164,28 @@ window.addEventListener("load", function () {
     imageForm.addEventListener("submit", function (event) {
         event.preventDefault();
         if ( fileInput.files.length < 1) {
-            console.log("No file selected. Not submitting.")
+            //console.log("No file selected. Not submitting.")
             return;
         }
 
-        console.log("SUBMISSION")
+        //console.log("SUBMISSION")
 
         sendData();
     });
 });
+
+
+function copyFunction(){
+    /* Get the text field */
+
+
+  /* Select the text field */
+  imageLink.select();
+  imageLink.setSelectionRange(0, 99999); /*For mobile devices*/
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the text: " + imageLink.value);
+}

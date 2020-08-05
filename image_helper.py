@@ -46,7 +46,7 @@ def crop_face(face, image_object):
     try:
         box = boxes[0].tolist()
     except:
-        raise Exception("No fave found")
+        raise Exception("No face found")
     
     face = face.crop(tuple([int(box[x]/scale) for x in range(4)]))
     size= image_object.size

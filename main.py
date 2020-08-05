@@ -34,8 +34,6 @@ CORS(app)
 
 
 ##splash screen
-@app.route('/home')
-@app.route('/index')
 @app.route('/')
 def splash():
     return render_template('index.html')
@@ -44,9 +42,6 @@ def splash():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
-
-
-
 
 ##main post request for parrotifying the image
 @app.route('/parrotify', methods=['POST'])
@@ -58,7 +53,7 @@ def parrotify():
         gif = make_parrot(request.files['image'])
     except Exception as ex:
         print(ex)
-        return str(ex), status.HTTP_500_INTERNAL_SERVER_ERROR
+        return {"exception": str(ex)}, status.HTTP_500_INTERNAL_SERVER_ERROR
 
     file_id = ft.generate_resource_id() 
     file_name = file_id + ".gif"
@@ -86,4 +81,4 @@ def parrotify():
 
 # running REST interface, port=5000 for direct test, port=5001 for deployment from PM2
 if __name__ == "__main__":
-    app.run(debug=False, port=5000)
+    app.run(debug=True, port=5000)

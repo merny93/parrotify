@@ -11,7 +11,6 @@ def generate_resource_id():
     @return: string uuid"""
     return str(uuid.uuid1()) 
 
-
 def save_new_gif(uuid):
     """
         Saves a new gif uuid with its associated expiration time
@@ -44,9 +43,6 @@ def re_init_data():
         fieldNames = ['uuid', 'exp_time']
         writer = csv.DictWriter(csvfile, fieldnames=fieldNames)
         writer.writeheader()
-
-
-
 
 def gif_manager():
     """

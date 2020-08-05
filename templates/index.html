@@ -16,17 +16,15 @@
     <!-- Custom CSS -->
     <!-- Custom site CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/blocks.css/dist/blocks.min.css" />
+
 
     {% include "favicons.html" %}
-
-    
 
 </head>
 
 <body style="height: 100%;">
     <div class="page-wrap">
-
-
     <div id="left-dec" class="dec"></div>
     <div id="right-dec" class="dec"></div>
     <div class="container">
@@ -67,7 +65,7 @@
                                 style="border: 1px solid grey;" onclick="copyToClipboard()">
                             <div class="button-holder">
                                 <a id="finished-gif-link" class="btn btn-primary" href="#" download="parrot_face.gif">Download </a>
-                                <a id="share-link" href="#" class = "btn btn-primary"> Link to share image</a>
+                                <a id="share-link" href="#" class = "btn btn-primary" onclick="copyFunction()"> Link to share image</a>
                                 <!-- <div id="share-popup" class="btn btn-primary" href="#" download="parrot_face.gif">Download </a> -->
                             </div>
                         <div class="button-holder" style="bottom: -50px;">
