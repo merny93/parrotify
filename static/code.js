@@ -22,7 +22,7 @@ var image_url = "";
 //***************************************** */
 //code to handle the hover stuff
 var drag_over = function(e) {
-    //console.log("dragover")
+    console.log("dragover")
 
     e.stopPropagation();
     e.preventDefault();
@@ -31,7 +31,7 @@ var drag_over = function(e) {
 };
 
 var drag_leave = function(e) {
-    //console.log("dragleave")
+    console.log("dragleave")
 
     e.stopPropagation();
     e.preventDefault();
@@ -41,7 +41,7 @@ var drag_leave = function(e) {
 };
 
 var drag_drop = function(e){
-    //console.log("dragdrop")
+    console.log("dragdrop")
 
     e.stopPropagation();
     e.preventDefault();	
@@ -55,6 +55,18 @@ dropArea.addEventListener('dragover', drag_over, false);
 dropMask.addEventListener('dragleave',drag_leave, false);
 dropMask.addEventListener('drop', drag_drop, false);
 
+
+function reset_click(){
+    imageForm.style.display = "block";
+    gifHolder.style.display = "none";
+    previewImage.setAttribute("src", '#');
+    dropMask.classList.add('hidden');
+    fileInput.classList.remove("hidden");
+    imageForm.reset();
+    closeImageBtn.classList.add('hidden')
+    browseLabel.classList.remove('hidden')
+    image_url = ""
+}
 
 /// code to get the input and send over
 fileInput.addEventListener("change", function () {
