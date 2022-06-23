@@ -1,4 +1,4 @@
-const GIF = require("./gif");
+
 
 console.log("hnlooos");
 
@@ -36,7 +36,8 @@ async function findFace(){
 
     let gif = new GIF({
         workers: 2,
-        quality: 10
+        quality: 10,
+        transparent: '#000'
     });
     //load a parrot
     for (frame in parrotDir){
@@ -87,14 +88,15 @@ async function findFace(){
 
         context.drawImage(img,0,0);
         context.drawImage(interCanvas,xOffset - (faceSizeX/2), yOffset-(faceSizeY/2),faceSizeX,faceSizeY);
-        gif.addFrame(canvas, {delay: 400});
+        gif.addFrame(canvas, {copy: true, delay:40});
 
         
 
     }
-    gif.on('finished', function(blob)
-    
-    context.drawImage(input,detection.box.x, detection.box.y,detection.box.width, detection.box.height,0,0,canvas.width, canvas.height);
+    gif.on('finished', function(blob) {
+        window.open(URL.createObjectURL(blob));
+    });
+    gif.render();
     console.log("done");
     // context.drawImage(input, 0,0,0,0,canvas.width, canvas.height);
 
