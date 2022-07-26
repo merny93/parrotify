@@ -5,7 +5,7 @@ async function loadAndPrimeModel(){
   console.log('done loading model');
   //now run a face through
   let primeImage = new Image();
-  primeImage.src = "primeFace.jfif"
+  primeImage.src = "src/static/primeFace.jfif"
   primeImage.onload =async function(){
     const detection = await faceapi.detectSingleFace(primeImage);
     console.log('done prime detection');
