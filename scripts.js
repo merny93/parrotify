@@ -23,6 +23,7 @@ async function findFace(){
 
 
     const detection = await faceapi.detectSingleFace(input);
+  
     console.log(detection);
     console.log(detection.box);
     // canvas.width = detection.box.width; 
