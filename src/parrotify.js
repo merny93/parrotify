@@ -1,7 +1,7 @@
 /* Load and prime the face detector model*/
 async function loadAndPrimeModel(){
   // await faceapi.nets.tinyFaceDetector.loadFromUri('/models'); //tinny model works terribly
-  await faceapi.nets.ssdMobilenetv1.loadFromUri('/src/libs/models'); //big model works very frikken well!
+  await faceapi.nets.ssdMobilenetv1.loadFromUri('/'); //big model works very frikken well!
   console.log('done loading model');
   //now run a face through
   let primeImage = new Image();
