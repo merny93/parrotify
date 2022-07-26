@@ -1,23 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
+
+
+<head>
+    <title>Parrotify</title>
+    <!-- For mobile friendliness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bonjour</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-  </head>
-  <body>
-    <label for="img">Select image:</label>
-    <input type="file" id="img" name="img" accept="image/*" onchange="updateImage(this)">
-    <img id="myImage" src="test_image.jpeg">
-    <button type="button" onclick="findFace();"> find face</button>
-    <canvas id="myCanvas"></canvas>
-    <!-- hello -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Custom site CSS -->
+    <link rel="stylesheet" href="styles.css">  
+
+    
+    <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='icons/parrot16.png') }}" sizes="16x16"> -->
+    <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='icons/parrot32.png') }}" sizes="32x32"> -->
+    <link rel="icon" type="image/png" href="parrot96.png" sizes="96x96">
+</head>
+
+<body style="height: 100%;">
+    <div class="page-wrap">
+
+
+    <div id="left-dec" class="dec"></div>
+    <div id="right-dec" class="dec"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div style="text-align: center;">
+                    <h1>Parrotify.me</h1>
+                    <h3>Choose a face to parrotify</h3>
+                </div>
+                <hr>
+                <div id="content-holder">
+                    <form id="image-form" style="height: 100%;">
+                        <div class="form-group">
+                            
+                            <div class="custom-file">
+                                <div id="dropzone">
+                                    <button id="close-image-btn" type="button" class="close hidden" aria-label="Close"
+                                        onclick="reset_click()">
+                                        <span aria-hidden="true">&times;&nbsp;</span>
+                                    </button>
+
+                                    <div id="dropmask" class="hidden"></div>
+                                        <div id="dropcontent">
+                                            <input type="file" name="image" id="file-input" accept="image/*" style="z-index: 100;"/>
+                                            <span id="browse-label">Drop or browse photo</span>
+                                            <img src="#" id="preview-image" alt="">
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-holder">
+                            <button id="submit-button" type="submit" class="btn btn-primary">Parrotify</button>
+                        </div>
+                    </form>
+                    <div id="gif-holder">
+                            <img src="#" id="finished-gif" alt="oh oh something aint right"
+                                style="border: 1px solid grey;">
+                            <div class="button-holder" >
+                                <a id="finished-gif-link" class="btn btn-primary" href="#" download="parrot_face.gif">Download </a>
+                            </div>
+                        <div class="button-holder" style="bottom: -50px;">
+                            <button class="btn btn-secondary" onclick="reset_click()">Parrotify another face!</button>
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+      <div>
+          <span class="text-muted"> Check out the source on <a href='https://github.com/merny93/parrot'>Github</a>!
+          </span>
+      </div>
+    </footer>
+
+    <!-- Site js functionality -->
+    <script src="code.js"></script>
+    <!-- Gif library -->
     <script src="gif.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js" integrity="sha512-nNOFtIS+H0lwgdUDaPn/g1ssw3uN9AkEM7zy2wLaTQeLQNeNiitUcLpEpDIh3Z4T22MdeTNru/SQbNM4ig2rng==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- face-api library -->
     <script src="face-api.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/build/commonjs/index.min.js"></script> -->
-	<script src="scripts.js"></script>
-  </body>
+    <!-- Parrotify backend -->
+    <script src="parrotify.js"></script>
+</body>
+
 </html>

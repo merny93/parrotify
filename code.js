@@ -90,60 +90,28 @@ fileInput.addEventListener("change", function () {
     }
 })
 
-// function httpGetAsync(theUrl, callback) {
-//     var xmlHttp = new XMLHttpRequest();
-//     xmlHttp.onreadystatechange = function () {
-//         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-//             callback(xmlHttp);
-//     }
-//     xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-//     xmlHttp.send(null);
-// }
+//display the gif
+function displayGIF(gifData){
+    let img = document.getElementById("finished-gif");
+    img.src = URL.createObjectURL(gifData);
+    let aTag = document.getElementById("finished-gif-link");
+    aTag.setAttribute("href", img.src);
+    imageForm.style.display = "none"
+    gifHolder.style.display = "block"
+}
 
-window.addEventListener("load", function () {
 
-    function sendData() {
-        const XHR = new XMLHttpRequest();
-        // Bind the FormData object and the form element
-        const FD = new FormData(imageForm);
-        // Define what happens on successful data submission
-        XHR.addEventListener("load", function (event) {
-            // alert(this.response.status)
-            if (this.status == 500){
-                alert("brosky");
-                return;
-            }
-            let img = document.getElementById("finished-gif");
-            img.src = URL.createObjectURL(this.response);
-            let aTag = document.getElementById("finished-gif-link");
-            aTag.setAttribute("href", img.src);
-            imageForm.style.display = "none"
-            gifHolder.style.display = "block"
-        });
-
-        // Define what happens in case of error
-        XHR.addEventListener("error", function (event) {
-            alert('Oops! Something went wrong.')
-        });
-
-        // Set up our request
-        XHR.open("POST", "/parrotify");
-        XHR.responseType = "blob";
-
-        // The data sent is what the user provided in the form
-        XHR.send(FD);
+//setup what the parrotify button does
+imageForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    if (Object.keys(faceapi.nets).length <1){
+      console.log("Model still not loaded");
+      return;
     }
-
-    // ...and take over its submit event.
-    imageForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        if ( fileInput.files.length < 1) {
-            console.log("No file selected. Not submitting.")
-            return;
-        }
-
-        console.log("SUBMISSION")
-
-        sendData();
-    });
-});
+    if ( fileInput.files.length < 1) {
+        console.log("No file selected. Not submitting.");
+        return;
+    }
+    console.log("SUBMISSION")
+    parrotifyFace(previewImage);
+  });
