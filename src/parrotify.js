@@ -40,8 +40,13 @@ async function parrotifyFace(imgSRC){
     let context = canvas.getContext("2d");
 
 
-    const detection = await faceapi.detectSingleFace(imgSRC);
+    const detection = await faceapi.detectSingleFace(imgSRC,new faceapi.SsdMobilenetv1Options({minConfidence: 0.25}));
     console.log("done detection")
+    if (detection == undefined){
+      alert("Could not find face, Try different image");
+      reset_click();
+      return;
+    }
 
     canvas.width = 1024;
 
@@ -52,9 +57,10 @@ async function parrotifyFace(imgSRC){
 
     let gif = new GIF({
         workers: 2,
-        quality: 10,
+        quality: 2,
         transparent: '#000',
-        workerScript: './src/libs/gif.worker.js'
+        workerScript: './src/libs/gif.worker.js',
+        dither: false,
     });
 
     (await parrotMap).forEach((offset, img) => {
