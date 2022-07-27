@@ -56,9 +56,12 @@ html {
 
 
     background-color: #f4f4f4;
-    outline: 2px dashed black;
     height: 400px;
     width: 400px;
+
+    border-style: dashed;
+    border-width: 5px;
+    border-color: #d0d0d0;
 
     left: 50%;
     margin-left: -200px;

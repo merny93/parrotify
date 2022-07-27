@@ -17,10 +17,13 @@
     <link rel="icon" type="image/png" href="src/static/parrot32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="src/static/parrot96.png" sizes="96x96">
     
+    <!-- Mostly to trick jekyll into keeping it. Not sure if i need it tho, probably not... -->
     <link rel="prefetch" href="src/libs/models/ssd_mobilenetv1_model-shard1">
     <link rel="prefetch" href="src/libs/models/ssd_mobilenetv1_model-shard2">
     <link rel="prefetch" href="src/libs/models/ssd_mobilenetv1_model-weights_manifest.json">
     
+    <!-- Adobe Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/lfe1hdl.css">
 </head>
 
 <body style="height: 100%;">
@@ -32,11 +35,9 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div style="text-align: center;">
+                <div style="text-align: center; margin-top: 40px">
                     <h1>Parrotify.me</h1>
-                    <h3>Choose a face to parrotify</h3>
                 </div>
-                <hr>
                 <div id="content-holder">
                     <form id="image-form" style="height: 100%;">
                         <div class="form-group">
@@ -51,7 +52,7 @@
                                     <div id="dropmask" class="hidden"></div>
                                         <div id="dropcontent">
                                             <input type="file" name="image" id="file-input" accept="image/*" style="z-index: 100;"/>
-                                            <span id="browse-label">Drop or browse photo</span>
+                                            <span id="browse-label" style="color: #919191">Drop or select photo</span>
                                             <img src="#" id="preview-image" alt="">
                                         </div>
                                 </div>
