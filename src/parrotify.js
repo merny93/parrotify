@@ -31,7 +31,7 @@ async function loadParrot(loc){
 //load model this takes a while so spawn a thread that does it
 loadAndPrimeModel();
 //load parrot
-let parrotMap = loadParrot('./parrots/confusedparrot/');
+let parrotMap = loadParrot('./parrots/parrot/');
 
 
 async function parrotifyFace(imgSRC){
