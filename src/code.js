@@ -70,13 +70,14 @@ function reset_click(){
 /// code to get the input and send over
 fileInput.addEventListener("change", function () {
     if (fileInput.files && fileInput.files[0]) {
+        // this no longer matters
         /* Check if image is too large */
-        if (fileInput.files[0].size > 5_000_000) {
-            fileInput.value = '';
-            previewImage.setAttribute("src", '#');
-            alert("Image is too large! Try an image under 5mb.")
-            return;
-        }
+        // if (fileInput.files[0].size > 5_000_000) {
+        //     fileInput.value = '';
+        //     previewImage.setAttribute("src", '#');
+        //     alert("Image is too large! Try an image under 5mb.")
+        //     return;
+        // }
 
         var reader = new FileReader();
         reader.onload = function (e) {
