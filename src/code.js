@@ -49,8 +49,8 @@ var drag_drop = function(e){
 };
 
 dropArea.addEventListener('dragover', drag_over, false);
-dropMask.addEventListener('dragleave',drag_leave, false);
-dropMask.addEventListener('drop', drag_drop, false);
+dropArea.addEventListener('dragleave',drag_leave, false);
+dropArea.addEventListener('drop', drag_drop, false);
 
 function share_click(){
     console.log(this);
