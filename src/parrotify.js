@@ -53,7 +53,8 @@ async function parrotifyFace(imgSRC){
     let gif = new GIF({
         workers: 2,
         quality: 10,
-        transparent: '#000'
+        transparent: '#000',
+        workerScript: './src/libs/gif.worker.js'
     });
 
     (await parrotMap).forEach((offset, img) => {
