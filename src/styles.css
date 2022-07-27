@@ -1,3 +1,5 @@
+/* https://coolors.co/palette/f08080-f4978e-f8ad9d-fbc4ab-ffdab9 */
+
 @import url("https://rsms.me/inter/inter.css");
 
 @supports (font-variation-settings: normal) {
@@ -15,8 +17,26 @@ html {
   margin: 0;
 }
 
+h1 {
+  color: #2f2f2f;
+}
+
 body {
   font-family: "Inter", sans-serif;
+  background-color: #ffdab9;
+}
+
+.btn-primary {
+  background-color: #f08080;
+  border-color: #f08080;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 0.8rem;
+}
+
+.btn-primary:hover {
+  background-color: hsl(0, 58%, 59%);
+  border-color: hsl(0, 58%, 59%);
 }
 
 body,
@@ -64,7 +84,7 @@ html {
 #dropzone {
   /* box-sizing: border-box; */
 
-  background-color: #f4f4f4;
+  background-color: rgb(244, 244, 244, 0.4);
   height: 400px;
   width: 400px;
 
