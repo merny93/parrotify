@@ -230,3 +230,22 @@ label {
     display: none;
   }
 }
+
+.parrot {
+  position: absolute;
+  z-index: -50;
+}
+
+.parrotDiv {
+  animation: right-scrolling 5s linear infinite;
+}
+
+@keyframes right-scrolling {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(110%);
+  }
+}
