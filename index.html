@@ -4,13 +4,6 @@
     <title>Parrotify</title>
     <!-- For mobile friendliness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-      crossorigin="anonymous"
-    />
     <!-- Custom site CSS -->
     <link rel="stylesheet" href="src/styles.css" />
 
@@ -47,12 +40,10 @@
       <div id="left-dec" class="dec"></div>
       <div id="right-dec" class="dec"></div>
       <div class="container">
-        <div class="row">
-          <div class="col">
-            <div style="text-align: center; margin-top: 50px">
+            <div style="text-align: center;">
               <h1>Parrotify.me</h1>
             </div>
-            <div class="movingParrots">
+            <!-- <div class="movingParrots">
               <div class="parrotDiv">
                 <img src="parrots/parrot/parrot.gif" class="parrot">
               </div>
@@ -62,16 +53,15 @@
               <div class="parrotDiv">
                 <img src="parrots/parrot/parrot.gif" class="parrot" style="left:200px">
               </div>
-           </div>
+           </div> -->
             <div id="content-holder">
               <form id="image-form" style="height: 100%">
                 <div class="form-group">
-                  <div class="custom-file">
                     <div id="dropzone">
                       <button
                         id="close-image-btn"
                         type="button"
-                        class="close hidden"
+                        class="hidden"
                         aria-label="Close"
                         onclick="reset_click()"
                       >
@@ -93,9 +83,8 @@
                         <img src="#" id="preview-image" alt="" />
                       </div>
                     </div>
-                  </div>
                 </div>
-                <div class="button-holder" style="margin-top: 20px">
+                <div class="button-holder">
                   <button
                     id="submit-button"
                     type="submit"
@@ -111,7 +100,7 @@
                   id="finished-gif"
                   alt="oh oh something aint right"
                 />
-                <div class="button-holder">
+                <div class="btn button-holder">
                   <a
                     id="finished-gif-link"
                     class="btn btn-primary"
@@ -120,14 +109,12 @@
                     >Download
                   </a>
                 </div>
-                <div class="button-holder" style="bottom: -50px">
+                <div class="button-holder">
                   <button class="btn btn-secondary" onclick="reset_click()">
                     Parrotify another face!
                 </a>
               </div>
             </div>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -135,7 +122,7 @@
       <div>
         <span class="text-muted">
           Check out the source on
-          <a href="https://github.com/merny93/parrot">Github</a>!
+          <a href="https://github.com/merny93/parrot" style="text-decoration:underline;">Github</a>!
         </span>
       </div>
     </footer>
