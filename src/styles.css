@@ -71,6 +71,7 @@ html {
   min-height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 
@@ -250,20 +251,28 @@ label {
 }
 
 .parrot {
-  position: absolute;
   z-index: -50;
+  height: inherit;
+  right: 100%;
+  position: absolute;
 }
 
-.parrotDiv {
-  animation: right-scrolling 5s linear infinite;
+.parrot-slider {
+  --parrot-size: 125px;
+  --parrot-time: 5s;
+  animation: right-scrolling var(--parrot-time) linear;
+  height: var(--parrot-size);
+  width: calc(var(--parrot-size) + 100%);
+  position: fixed;
+  z-index: -100;
 }
 
 @keyframes right-scrolling {
   from {
-    transform: translateX(-50%);
+    transform: translateX(0%);
   }
 
   to {
-    transform: translateX(110%);
+    transform: translateX(100%);
   }
 }
