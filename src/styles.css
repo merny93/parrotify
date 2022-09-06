@@ -1,6 +1,6 @@
 /* https://coolors.co/palette/f08080-f4978e-f8ad9d-fbc4ab-ffdab9 */
 
-@import url("https://rsms.me/inter/inter.css");
+/* @import url("https://rsms.me/inter/inter.css"); */
 
 @supports (font-variation-settings: normal) {
   html {
@@ -32,6 +32,31 @@ body {
   background-color: #ffdab9;
 }
 
+.btn {
+  appearance: auto;
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    box-sizing: border-box;
+    background-color: buttonface;
+    margin: 0em;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
+}
+
 .btn-primary {
   background-color: #f08080;
   border-color: #f08080;
@@ -49,11 +74,11 @@ body {
 }
 
 .btn-secondary {
-  /* background-color: #f08080;
-  border-color: #f08080; */
-  padding: 7px 15px;
+  /* background-color: #f08080; */
+  border-color: #f08080;
+  padding: 5px 7px;
   font-weight: 400;
-  border-radius: 0.8rem;
+  border-radius: 0.4rem;
 }
 
 .btn-secondary:hover {
@@ -216,8 +241,9 @@ label {
 }
 
 #content-holder {
-  height: 400px;
-  width: 400px;
+  --view-size: min(400px, 80vw);
+  height: var(--view-size);
+  width: var(--view-size);
   margin: auto;
 }
 
