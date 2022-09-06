@@ -47,9 +47,9 @@ var drag_drop = function (e) {
   fileInput.dispatchEvent(new Event("change"));
 };
 
-dropArea.addEventListener('dragover', drag_over, false);
-dropArea.addEventListener('dragleave',drag_leave, false);
-dropArea.addEventListener('drop', drag_drop, false);
+dropArea.addEventListener("dragover", drag_over, false);
+dropArea.addEventListener("dragleave", drag_leave, false);
+dropArea.addEventListener("drop", drag_drop, false);
 
 function share_click() {
   console.log(this);
