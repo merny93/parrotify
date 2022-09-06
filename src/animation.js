@@ -25,4 +25,4 @@ function spawnParrot() {
   setTimeout(spawnParrot, Math.floor(Math.random() * 1000 + 500));
 }
 
-spawnParrot();
+// spawnParrot();

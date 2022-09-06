@@ -4,12 +4,15 @@ async function loadAndPrimeModel() {
   await faceapi.nets.ssdMobilenetv1.loadFromUri("./src/libs/models"); //big model works very frikken well!
   console.log("done loading model");
   //now run a face through
-  let primeImage = new Image();
-  primeImage.src = "src/static/primeFace.jfif";
-  primeImage.onload = async function () {
-    const detection = await faceapi.detectSingleFace(primeImage);
-    console.log("done prime detection");
-  };
+  return new Promise((resolve, reject) => {
+    let primeImage = new Image();
+    primeImage.src = "src/static/primeFace.jfif";
+    primeImage.onload = async function () {
+      const detection = await faceapi.detectSingleFace(primeImage);
+      console.log("done prime detection");
+      resolve();
+    };
+  });
 }
 
 /* load the parrot frames
@@ -27,7 +30,10 @@ async function loadParrot(loc) {
 }
 
 //load model this takes a while so spawn a thread that does it
-loadAndPrimeModel();
+loadAndPrimeModel().then(() => {
+  document.getElementById("loading").style.display = "none";
+  document.getElementById("content-holder").style.display = "";
+});
 //load parrot
 let parrotMap = loadParrot("./parrots/parrot/");
 

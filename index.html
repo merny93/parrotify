@@ -55,7 +55,12 @@
                 <img src="parrots/parrot/parrot.gif" class="parrot" style="left:200px">
               </div>
            </div> -->
-            <div id="content-holder">
+           <div id="loading">
+           <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+           <div>Loading parrots...</div>
+
+           </div>
+            <div id="content-holder" style="display: none">
               <form id="image-form" style="height: 100%">
                 <div class="form-group">
                     <div id="dropzone">
@@ -128,10 +133,10 @@
       </div>
     </footer>
 
-    <!-- Site js functionality -->
-    <script src="src/code.js"></script>
     <!-- Annimation! -->
     <script src="src/animation.js"></script>
+    <!-- Site js functionality -->
+    <script src="src/code.js"></script>
     <!-- Gif library -->
     <script src="src/libs/gif.js"></script>
     <!-- <script src="src/libs/gif.worker.js"></script> -->
